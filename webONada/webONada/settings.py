@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
+AUTH_USER_MODEL = 'users.User'
 
 # Application definition
 
@@ -37,6 +38,7 @@ BASE_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
 ]
 
 LOCAL_APPS = [
@@ -44,6 +46,7 @@ LOCAL_APPS = [
     'apps.services',
     'apps.users',
     'apps.sites',
+
 ]
 
 THIRD_APPS = [
@@ -131,8 +134,11 @@ USE_TZ = True
 
 # STATIC_URL = "static/"
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '..', 'static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_URL = '/media/'
