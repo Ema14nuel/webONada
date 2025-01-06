@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %} {% endblock title %}</title>
+        <meta name="description" content="{% block description %} {% endblock description %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Links Of CSS File -->
+        <link rel="stylesheet" href="{% static 'css/sidebar-menu.css' %}">
+        <link rel="stylesheet" href="{% static 'css/simplebar.css' %}">
+        <link rel="stylesheet" href="{% static 'css/apexcharts.css' %}">
+        <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+        <link rel="stylesheet" href="{% static 'css/rangeslider.css' %}">
+        <link rel="stylesheet" href="{% static 'css/sweetalert.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/quill.snow.css' %}">
+        <link rel="stylesheet" href="{% static 'css/google-icon.css' %}">
+        <link rel="stylesheet" href="{% static 'css/remixicon.css' %}">
+        <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/fullcalendar.main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jsvectormap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/lightpick.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    </head>
+    <body class="boxed-size">
+        <div class="preloader" id="preloader">
+            <div class="preloader">
+                <div class="waviy position-relative">
+                    <span class="d-inline-block">T</span>
+                    <span class="d-inline-block">R</span>
+                    <span class="d-inline-block">E</span>
+                    <span class="d-inline-block">Z</span>
+                    <span class="d-inline-block">O</span>
+                </div>
+            </div>
+        </div>
+        
+        {% include 'base/sidebar.html' %}
+
+        <div class="container-fluid">
+            <div class="main-content d-flex flex-column">
+                <!-- Start Header Area -->
+                {% include 'base/header.html' %}
+                <!-- End Header Area -->
+
+                <div class="main-content-container overflow-hidden">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                        <h3 class="mb-0">
+                        {% block title_page %} {% endblock title_page %}
+                        </h3>
+
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb align-items-center mb-0 lh-1">
+                                <li class="breadcrumb-item">
+                                    <a href="#" class="d-flex align-items-center text-decoration-none">
+                                        <i class="ri-home-4-line fs-18 text-primary me-1"></i>
+                                        <span class="text-secondary fw-medium hover">Dashboard</span>
+                                    </a>
+                                </li>
+                                
+                                {% block breadcrumb %}
+                                    
+                                {% endblock breadcrumb %}
+                                    
+                            </ol>
+                        </nav>
+                    </div>
+
+                    {% block content %} {% endblock content %}
+
+                </div>
+
+                <div class="flex-grow-1"></div>
+
+                <!-- Start Footer Area -->
+                <footer class="footer-area bg-white text-center rounded-top-7">
+                    <p class="fs-14">© <span class="text-primary-div">Trezo</span> is Proudly Owned by <a href="https://envytheme.com/" target="_blank" class="text-decoration-none text-primary">EnvyTheme</a></p>
+                </footer>
+                <!-- End Footer Area -->
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-end bg-white" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+            <div class="offcanvas-header bg-body-bg py-3 px-4">
+                <h5 class="offcanvas-title fs-18" id="offcanvasScrollingLabel">Theme Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-4">
+                <div class="mb-4 pb-2">
+                    <h4 class="fs-15 fw-semibold border-bottom pb-2 mb-3">RTL / LTR</h4>
+                    <div class="settings-btn rtl-btn">
+                        <label id="switch" class="switch">
+                            <input type="checkbox" onchange="toggleTheme()" id="slider">
+                            <span class="sliders round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4 pb-2">
+                    <h4 class="fs-15 fw-semibold border-bottom pb-2 mb-3">Container Style Fluid / Boxed</h4>
+                    <button class="boxed-style settings-btn fluid-boxed-btn" id="boxed-style">
+                        Click To <span class="fluid">Fluid</span> <span class="boxed">Boxed</span>
+                    </button>
+                </div>
+                <div class="mb-4 pb-2">
+                    <h4 class="fs-15 fw-semibold border-bottom pb-2 mb-3">Only Sidebar Light / Dark</h4>
+                    <button class="sidebar-light-dark settings-btn sidebar-dark-btn" id="sidebar-light-dark">
+                        Click To <span class="dark1">Dark</span> <span class="light1">Light</span>
+                    </button>
+                </div>
+                <div class="mb-4 pb-2">
+                    <h4 class="fs-15 fw-semibold border-bottom pb-2 mb-3">Only Header Light / Dark</h4>
+                    <button class="header-light-dark settings-btn header-dark-btn" id="header-light-dark">
+                        Click To <span class="dark2">Dark</span> <span class="light2">Light</span>
+                    </button>
+                </div>
+                <div class="mb-4 pb-2">
+                    <h4 class="fs-15 fw-semibold border-bottom pb-2 mb-3">Only Footer Light / Dark</h4>
+                    <button class="footer-light-dark settings-btn footer-dark-btn" id="footer-light-dark">
+                        Click To <span class="dark3">Dark</span> <span class="light3">Light</span>
+                    </button>
+                </div>
+                <div class="mb-4 pb-2">
+                    <h4 class="fs-15 fw-semibold border-bottom pb-2 mb-3">Card Style Radius / Square</h4>
+                    <button class="card-radius-square settings-btn card-style-btn" id="card-radius-square">
+                        Click To <span class="square">Square</span> <span class="radius">Radius</span>
+                    </button>
+                </div>
+                <div class="mb-4 pb-2">
+                    <h4 class="fs-15 fw-semibold border-bottom pb-2 mb-3">Card Style BG White / Gray</h4>
+                    <button class="card-bg settings-btn card-bg-style-btn" id="card-bg">
+                        Click To <span class="white">White</span> <span class="gray">Gray</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Link Of JS File -->
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/sidebar-menu.js' %}"></script>
+        <script src="{% static 'js/dragdrop.js' %}"></script>
+        <script src="{% static 'js/rangeslider.min.js' %}"></script>
+        <script src="{% static 'js/sweetalert.js' %}"></script>
+        <script src="{% static 'js/quill.min.js' %}"></script>
+        <script src="{% static 'js/data-table.js' %}"></script>
+        <script src="{% static 'js/prism.js' %}"></script>
+        <script src="{% static 'js/clipboard.min.js' %}"></script>
+        <script src="{% static 'js/feather.min.js' %}"></script>
+        <script src="{% static 'js/simplebar.min.js' %}"></script>
+        <script src="{% static 'js/apexcharts.min.js' %}"></script>
+        <script src="{% static 'js/echarts.js' %}"></script>
+        <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+        <script src="{% static 'js/fullcalendar.main.js' %}"></script>
+        <script src="{% static 'js/jsvectormap.min.js' %}"></script>
+        <script src="{% static 'js/world-merc.js' %}"></script>
+        <script src="{% static 'js/moment.min.js' %}"></script>
+        <script src="{% static 'js/lightpick.js' %}"></script>
+        <script src="{% static 'js/custom/apexcharts.js' %}"></script>
+        <script src="{% static 'js/custom/echarts.js' %}"></script>
+        <script src="{% static 'js/custom/custom.js' %}"></script>
+
+        {% block scripts %}
+    
+        {% endblock scripts %}
+    </body>
+</html>
