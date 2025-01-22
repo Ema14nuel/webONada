@@ -3,5 +3,6 @@ from .views import views
 # url_principal = 'sites/'
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.inicio, name='inicio'),
+    path('home', views.home, name='home'),
 ]

@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="{% static 'admin/css/style.css' %}">
 		
 		<!-- Favicon -->
-		<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+		<link rel="icon" type="image/png" href="{% static 'admin/images/favicon.png' %}">
     </head>
     <body class="boxed-size">
         <div class="preloader" id="preloader">
@@ -41,12 +41,12 @@
             </div>
         </div>
         
-        {% include 'base/sidebar.html' %}
+        {% include 'base/admin/sidebar.html' %}
 
         <div class="container-fluid">
             <div class="main-content d-flex flex-column">
                 <!-- Start Header Area -->
-                {% include 'base/header.html' %}
+                {% include 'base/admin/header.html' %}
                 <!-- End Header Area -->
 
                 <div class="main-content-container overflow-hidden">
