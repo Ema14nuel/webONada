@@ -6,3 +6,6 @@ def home(request):
 
 def inicio(request):
     return render(request, 'site/index.html')
+
+def products_list(request):
+    return render(request, 'site/products.html')
