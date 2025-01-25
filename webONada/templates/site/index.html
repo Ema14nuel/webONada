@@ -1,4 +1,5 @@
 {% extends 'base/site/index.html' %}
+{% load static %}
 
 {% block title %} Este es un {% endblock title %}
 
@@ -28,9 +29,9 @@
     <div class="swiper th-slider hero-slider1" id="heroSlide1" data-slider-options='{"effect":"fade", "autoHeight": "true"}'>
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="hero-inner" data-bg-src="assets/img/hero/hero_bg_1_1.jpg" data-overlay="black4" data-opacity="5">
+                <div class="hero-inner" data-bg-src="{% static 'site/img/hero/hero_bg_1_1.jpg' %}" data-overlay="black4" data-opacity="5">
                     <div class="hero-bg-shape1-1">
-                        <img src="assets/img/hero/hero-bg-shape1-1.png" alt="img">
+                        <img src="{% static 'site/img/hero/hero-bg-shape1-1.png' %}" alt="img">
                     </div>
                     <div class="container">
                         <div class="row justify-content-center">
@@ -55,9 +56,9 @@
 
             </div>
             <div class="swiper-slide">
-                <div class="hero-inner" data-bg-src="assets/img/hero/hero_bg_1_2.jpg" data-overlay="black4" data-opacity="5">
+                <div class="hero-inner" data-bg-src="{% static 'site/img/hero/hero_bg_1_2.jpg' %}" data-overlay="black4" data-opacity="5">
                     <div class="hero-bg-shape1-1">
-                        <img src="assets/img/hero/hero-bg-shape1-1.png" alt="img">
+                        <img src="{% static 'site/img/hero/hero-bg-shape1-1.png' %}" alt="img">
                     </div>
                     <div class="container">
                         <div class="row justify-content-center">
