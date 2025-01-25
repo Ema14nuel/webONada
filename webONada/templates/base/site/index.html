@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Shared on THEMELOCK.COM - Donat - Charity & Donation HTML Template - Home One</title>
+        <title>{% block title_page %} {% endblock title_page %}</title>
         <meta name="author" content="Donat">
         <meta name="description" content="Donat - Charity & Donation HTML Template">
         <meta name="keywords" content="Donat - Charity & Donation HTML Template">
@@ -67,7 +67,17 @@
             </div>
         </div>
 
+        {% include 'base/site/header.html' %}
+
+        {% block content %}
         
+        {% endblock content %}
+
+        {% include 'base/site/footer.html' %}
+
+       
+
+
         
         <!-- Jquery -->
         <script src="{% static 'site/js/vendor/jquery-3.7.1.min.js' %}"></script>
