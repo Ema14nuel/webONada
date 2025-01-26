@@ -15,17 +15,401 @@
 
 
 {% block breadcrumb %}
-<li class="breadcrumb-item active" aria-current="page">
-    <span class="fw-medium">Extra Pages</span>
-</li>
-<li class="breadcrumb-item active" aria-current="page">
-    <span class="fw-medium">Final no va más</span>
-</li>
+<div class="breadcumb-wrapper" data-bg-src="{% static 'site/img/bg/breadcumb-bg.jpg' %}" data-overlay="theme">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">Shop</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="index.html">Home</a></li>
+                <li>Shop</li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock breadcrumb %}
 
 
 {% block content %}
+<div id="QuickView" class="white-popup mfp-hide">
+    <div class="container bg-white rounded-10">
+        <div class="row gx-60">
+            <div class="col-lg-6">
+                <div class="product-big-img">
+                    <div class="img"><img src="{% static 'site/img/product/product_details_1_1.png' %}" alt="Product Image"></div>
+                </div>
+            </div>
+            <div class="col-lg-6 align-self-center">
+                <div class="product-about">
+                    <p class="price">$120.85<del>$150.99</del></p>
+                    <h2 class="product-title">Medicine</h2>
+                    <div class="product-rating">
+                        <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5"><span style="width:100%">Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span></div>
+                        <a href="shop-details.html" class="woocommerce-review-link">(<span class="count">4</span> customer reviews)</a>
+                    </div>
+                    <p class="text">Syndicate customized growth strategies prospective human capital leverage other's optimal e-markets without transparent catalysts for change. Credibly coordinate highly efficient methods of empowerment cross unit solutions.</p>
+                    <div class="mt-2 link-inherit">
+                        <p>
+                            <strong class="text-title me-3">Availability:</strong>
+                            <span class="stock in-stock"><i class="far fa-check-square me-2 ms-1"></i>In Stock</span>
+                        </p>
+                    </div>
+                    <div class="actions">
+                        <div class="quantity">
+                            <input type="number" class="qty-input" step="1" min="1" max="100" name="quantity" value="1" title="Qty">
+                            <button class="quantity-plus qty-btn"><i class="far fa-chevron-up"></i></button>
+                            <button class="quantity-minus qty-btn"><i class="far fa-chevron-down"></i></button>
+                        </div>
+                        <button class="th-btn">Add to Cart</button>
+                        <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                    </div>
+                    <div class="product_meta">
+                        <span class="sku_wrapper">SKU: <span class="sku">Medicine-fits-chevy-camaro</span></span>
+                        <span class="posted_in">Category: <a href="shop.html">Vitamin & Medicine</a></span>
+                        <span>Tags: <a href="shop.html">Medicine</a><a href="shop.html">Drug</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+    </div>
+</div><
+<section class="space-top space-extra2-bottom">
+    <div class="container">
+        <div class="th-sort-bar">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md">
+                    <p class="woocommerce-result-count">Showing 1–12 of 16 results</p>
+                </div>
 
+                <div class="col-md-auto">
+                    <form class="woocommerce-ordering" method="get">
+                        <select name="orderby" class="orderby" aria-label="Shop order">
+                            <option value="menu_order" selected="selected">Default Sorting</option>
+                            <option value="popularity">Sort by popularity</option>
+                            <option value="rating">Sort by average rating</option>
+                            <option value="date">Sort by latest</option>
+                            <option value="price">Sort by price: low to high</option>
+                            <option value="price-desc">Sort by price: high to low</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row gy-30 gx-30">
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_1.png' %}" alt="Product Image">
+                        <span class="product-tag">Hot</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <a href="shop-details.html" class="product-category"><br />
+
+                        <h3 class="product-title"><a href="shop-details.html">Medicine</a></h3>
+                        <span class="price">$177.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_2.png' %}" alt="Product Image">
+                        <span class="product-tag">New</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        
+                        <h3 class="product-title"><a href="shop-details.html">Dress</a></h3>
+                        <span class="price">$39.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_3.png' %}" alt="Product Image">
+                        <span class="product-tag">Hot</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Books</a></h3>
+                        <span class="price">$96.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_4.png' %}" alt="Product Image">
+                        <span class="product-tag">Sale</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Chair</a></h3>
+                        <span class="price">$08.85<del>$06.99</del></span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_5.png' %}" alt="Product Image">
+                        <span class="product-tag">New</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Chair</a></h3>
+                        <span class="price">$32.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_6.png' %}" alt="Product Image">
+                        <span class="product-tag">Hot</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Baby Dress</a></h3>
+                        <span class="price">$30.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_7.png' %}" alt="Product Image">
+                        <span class="product-tag">New</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Comfort Chair</a></h3>
+                        <span class="price">$232.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_8.png' %}" alt="Product Image">
+                        <span class="product-tag">Hot</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Short Table</a></h3>
+                        <span class="price">$30.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_9.png' %}" alt="Product Image">
+                        <span class="product-tag">New</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Cloths</a></h3>
+                        <span class="price">$32.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_10.png' %}" alt="Product Image">
+                        <span class="product-tag">Hot</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Hat</a></h3>
+                        <span class="price">$30.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_11.png' %}" alt="Product Image">
+                        <span class="product-tag">New</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Shoes</a></h3>
+                        <span class="price">$232.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="th-product product-grid">
+                    <div class="product-img">
+                        <img src="{% static 'site/img/product/product_1_12.png' %}" alt="Product Image">
+                        <span class="product-tag">Hot</span>
+                        <div class="actions">
+                            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                            <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                            <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title"><a href="shop-details.html">Jacket</a></h3>
+                        <span class="price">$30.85</span>
+                        <div class="woocommerce-product-rating">
+                            <span class="count">(120 Reviews)</span>
+                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="th-pagination text-center pt-50">
+            <ul>
+                <li><a href="blog.html"><i class="fas fa-arrow-left"></i></a></li>
+                <li><a href="blog.html">1</a></li>
+                <li><a href="blog.html">2</a></li>
+                <li><a href="blog.html"><i class="fas fa-arrow-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</section>
 {% endblock content %}
     
 
