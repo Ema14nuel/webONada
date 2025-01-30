@@ -7,7 +7,7 @@ from apps.products.models import ProductPresentation
 # Create your views here.
 def products_list(request):
     products_list  = ProductPresentation.objects.select_related('product').filter(active=True)
-    
+    print(products_list)
 
     context = {
         'products_list': products_list
