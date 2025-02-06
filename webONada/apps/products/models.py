@@ -36,7 +36,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, related_name='products')
-    cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    
 
     def __str__(self):
         return self.name
@@ -52,7 +52,7 @@ class ProductPresentation(models.Model):
     active = models.BooleanField(default=True, help_text="Is this product active?")
     stock = models.IntegerField(default=0, help_text="Stock available for this product")
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, help_text="Price for this product")
-
+    cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     class Meta:
         ordering = ['order']
@@ -69,6 +69,7 @@ class ProductRating(models.Model):
     rating = models.IntegerField(help_text="Rating value from 1 to 5")
     review = models.TextField(blank=True, null=True, help_text="Optional review text")
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
     class Meta:
         unique_together = ('product', 'user')
