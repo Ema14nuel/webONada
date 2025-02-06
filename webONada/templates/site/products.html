@@ -1,4 +1,5 @@
 {% extends 'base/site/index.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block title %} Este es un {% endblock title %}
@@ -97,6 +98,9 @@
         </div>
         <div class="row">
             <div class="col-md-3">
+                {% crispy form %}
+
+
                 <aside class="sidebar-area">
                     <div class="widget widget_search  ">
                         <form class="search-form">
