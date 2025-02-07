@@ -74,6 +74,8 @@
         <button title="Close (Esc)" type="button" class="mfp-close">×</button>
     </div>
 </div>
+
+
 <section class="space-top space-extra2-bottom">
     <div class="container">
         <div class="th-sort-bar">
@@ -190,6 +192,35 @@
             </div>
             <div class="col-md-9">
                 <div class="row gy-30 gx-30">
+                    
+                    
+                    {% for product in products_list %}
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="th-product product-grid">
+                            <div class="product-img">
+                                <img src="{% static 'site/img/product/product_1_9.png' %}" alt="Product Image">
+                                <span class="product-tag">New</span>
+                                <div class="actions">
+                                    <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
+                                    <a href="cart.html" class="icon-btn"><i class="far fa-cart-plus"></i></a>
+                                    <a href="wishlist.html" class="icon-btn"><i class="far fa-heart"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <a href="shop-details.html" class="product-category"></a>
+                                <h3 class="product-title"><a href="shop-details.html">{{product.featured_title}}</a></h3>
+                                <span class="price">$32.85</span>
+                                <div class="woocommerce-product-rating">
+                                    <span class="count">(120 Reviews)</span>
+                                    <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
+                                        <span>Rated <strong class="rating">5.00</strong> out of 5 based on <span class="rating">1</span> customer rating</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                        
 
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                         <div class="th-product product-grid">
