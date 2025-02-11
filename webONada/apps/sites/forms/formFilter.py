@@ -6,20 +6,34 @@ from crispy_forms.layout import Layout, Submit, Row, Column, Fieldset
 from apps.products.models import ProductPresentation, Product, Category
 
 class formFilterProduct(forms.Form):
+
     category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
 
+    featured_title = forms.CharField(
+        required=False, 
+        label="Nombre del producto", 
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control', 
+                'placeholder': 'Ingrese título'
+                })
+    )
+
     def __init__(self, *args, **kwargs):
-        super(formFilterProduct, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'form_filter_product'
         self.helper.form_method = 'get'
         self.helper.layout = Layout(
             Fieldset(
-                'Filter Products',
+                'Buscar productos',
                 Row(
-                    Column('category', css_class='form-group col-md-6 mb-0'),
+                    Column('featured_title', css_class='form-group col-md-12 mb-3'),
+                    css_class='form-row'
+                ),
+                Row(
+                    Column('category', css_class='form-group col-md-12 mb-3'),
                     css_class='form-row'
                 ),
             )
         )
-    
