@@ -22,8 +22,10 @@ def products_list(request):
         if form.cleaned_data.get('featured_title'):
             products_list = products_list.filter(featured_title__icontains=form.cleaned_data['featured_title'])
         
-        if form.cleaned_data.get('category'):
-            products_list = products_list.filter(product__category=form.cleaned_data['category'])
+        # if form.cleaned_data.get('category'):
+        #     categories = form.cleaned_data['category']
+        #     print('Categorías seleccionadas:', categories)
+        #     products_list = products_list.filter(product__category__in=categories)
         # if form.cleaned_data.get('price_min'):
         #     products_list = products_list.filter(price__gte=form.cleaned_data['price_min'])
         # if form.cleaned_data.get('price_max'):

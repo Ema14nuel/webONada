@@ -7,7 +7,7 @@ from apps.products.models import ProductPresentation, Product, Category
 
 class formFilterProduct(forms.Form):
 
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
+    
 
     featured_title = forms.CharField(
         required=False, 
@@ -24,6 +24,15 @@ class formFilterProduct(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = 'form_filter_product'
         self.helper.form_method = 'get'
+
+        # Campos del formulario
+        self.fields['category'] = forms.ModelMultipleChoiceField(
+            queryset=Category.objects.all(),
+            required=False,
+            widget=forms.CheckboxSelectMultiple, 
+            label="Categoría",
+        )
+
         self.helper.layout = Layout(
             Fieldset(
                 'Buscar productos',
