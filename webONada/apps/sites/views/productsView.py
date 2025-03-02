@@ -42,3 +42,7 @@ def products_list(request):
     }
 
     return render(request, 'site/products.html', context)
+
+def home(request):
+    
+    return render(request, 'index.html')
