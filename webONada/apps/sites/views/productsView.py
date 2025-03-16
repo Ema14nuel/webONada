@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render # type: ignore
 
 #models
 from apps.products.models import ProductPresentation

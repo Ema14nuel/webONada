@@ -3,8 +3,6 @@ from .views import views, productsView
 # url_principal = 'sites/'
 
 urlpatterns = [
-    path('', views.inicio, name='inicio'),
-    path('home', views.home, name='home'),
-    path('productos', productsView.products_list, name='products'),
-    path('jango', productsView.home, name='home'),
+    path('', views.home, name='inicio'),
+    
 ]
