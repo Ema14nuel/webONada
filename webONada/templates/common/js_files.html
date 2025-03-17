@@ -6,3 +6,19 @@
     webpack is putting everything together at assets/_js/main/app.js
 -->
 <script src="{% static 'assets/js/dashmix.app.min.js' %}"></script>
+
+<!-- jQuery (required for jQuery Sparkline plugin) -->
+<script src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/chart.js/chart.umd.js' %}"></script>
+
+<!-- Page JS Code -->
+<script src="{% static 'assets/js/pages/be_pages_dashboard_v1.min.js' %}"></script>
+
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/slick-carousel/slick.min.js' %}"></script>
+
+<!-- Page JS Helpers (jQuery Sparkline plugin) -->
+<script>Dashmix.helpersOnLoad(['jq-sparkline']);</script>

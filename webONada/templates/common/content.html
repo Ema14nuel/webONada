@@ -1,3 +1,4 @@
+{% extends 'common/base.html' %}
 {% load static %}
 <!-- Main Container -->
 <main id="main-container">
@@ -25,7 +26,10 @@
                 <h3 class="block-title">Block Title</h3>
             </div>
             <div class="block-content">
-                <p>Your content..</p>
+                {% block page_content %}
+                <!-- Este bloque será sobrescrito en páginas específicas -->
+                {% endblock page_content %}
+                    
             </div>
         </div>
         <!-- END Your Block -->

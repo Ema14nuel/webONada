@@ -15,7 +15,7 @@
 
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+        <link rel="shortcut icon" href="{% static 'assets/media/favicons/favicon.png' %}">
         <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
         <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
         <!-- END Icons -->
@@ -87,8 +87,25 @@
             {% include 'common/sidebar.html' %}
             <!-- hHeader-->
             {% include 'common/header.html' %}
+            
             <!-- Content -->
-            {% include 'common/content.html' %}
+            <!-- Main Container -->
+            <main id="main-container">
+                
+                {% block breadcrumb %}
+                    
+                {% endblock breadcrumb %}
+                    
+                <!-- Page Content -->
+                <div class="content">
+                    {% block page_content %}
+                    <!-- Este bloque será sobrescrito en páginas específicas -->
+                    {% endblock page_content %} 
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+            
             <!-- Footer -->
             {% include 'common/footer.html' %}
         </div>

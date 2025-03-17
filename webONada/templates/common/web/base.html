@@ -1,0 +1,302 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+        <title>
+        {% block title_principal %}
+            
+        {% endblock title_principal %}
+        </title>
+
+        {% include 'common/meta_tags.html' %}
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{% static 'assets/media/favicons/favicon.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+        <!-- END Icons -->
+
+        {% include 'common/css_files.html' %}
+    </head>
+
+  <body>
+    <!-- Page Container -->
+    <!--
+      Available classes for #page-container:
+
+      GENERIC
+
+        'remember-theme'                            Remembers active color theme and dark mode between pages using localStorage when set through
+                                                    - Theme helper buttons [data-toggle="theme"],
+                                                    - Layout helper buttons [data-toggle="layout" data-action="dark_mode_[on/off/toggle]"]
+                                                    - ..and/or Dashmix.layout('dark_mode_[on/off/toggle]')
+
+      SIDEBAR & SIDE OVERLAY
+
+        'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+        'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+        'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+        'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+        'sidebar-dark'                              Dark themed sidebar
+
+        'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+        'side-overlay-o'                            Visible Side Overlay by default
+
+        'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
+
+        'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
+
+      HEADER
+
+        ''                                          Static Header if no class is added
+        'page-header-fixed'                         Fixed Header
+
+
+      FOOTER
+
+        ''                                          Static Footer if no class is added
+        'page-footer-fixed'                         Fixed Footer (please have in mind that the footer has a specific height when is fixed)
+
+      HEADER STYLE
+
+        ''                                          Classic Header style if no class is added
+        'page-header-dark'                          Dark themed Header
+        'page-header-glass'                         Light themed Header with transparency by default
+                                                    (absolute position, perfect for light images underneath - solid light background on scroll if the Header is also set as fixed)
+        'page-header-glass page-header-dark'         Dark themed Header with transparency by default
+                                                    (absolute position, perfect for dark images underneath - solid dark background on scroll if the Header is also set as fixed)
+
+      MAIN CONTENT LAYOUT
+
+        ''                                          Full width Main Content if no class is added
+        'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+        'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+
+      DARK MODE
+
+        'sidebar-dark page-header-dark dark-mode'   Enable dark mode (light sidebar/header is not supported with dark mode)
+
+
+    -->
+
+    <div id="page-container" class="page-header-dark main-content-boxed">
+        
+        {% include 'common/web/header.html' %}
+        
+
+        <!-- Main Container -->
+        <main id="main-container">
+            <!-- Navigation -->
+            <div class="bg-sidebar-dark">
+
+                <div class="content">
+                    <!-- Toggle Main Navigation -->
+                    <div class="d-lg-none push">
+                    <!-- Class Toggle, functionality initialized in Helpers.dmToggleClass() -->
+                    <button type="button" class="btn w-100 btn-primary d-flex justify-content-between align-items-center" data-toggle="class-toggle" data-target="#main-navigation" data-class="d-none">
+                        Menu
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    </div>
+                    <!-- END Toggle Main Navigation -->
+
+                    <!-- Main Navigation -->
+                    <div id="main-navigation" class="d-none d-lg-block push">
+                    <ul class="nav-main nav-main-horizontal nav-main-hover nav-main-dark">
+                        <li class="nav-main-item">
+                            <a class="nav-main-link active" href="bd_dashboard.html">
+                                <i class="nav-main-link-icon fa fa-compass"></i>
+                                <span class="nav-main-link-name">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-heading">Variations</li>
+                        <li class="nav-main-item">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon fa fa-puzzle-piece"></i>
+                            <span class="nav-main-link-name">Variations</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" href="bd_simple_1.html">
+                                <span class="nav-main-link-name">Simple 1</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" href="bd_simple_2.html">
+                                <span class="nav-main-link-name">Simple 2</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" href="bd_image_1.html">
+                                <span class="nav-main-link-name">Image 1</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" href="bd_image_2.html">
+                                <span class="nav-main-link-name">Image 2</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" href="bd_video_1.html">
+                                <span class="nav-main-link-name">Video 1</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" href="bd_video_2.html">
+                                <span class="nav-main-link-name">Video 2</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <span class="nav-main-link-name">More Options</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                <a class="nav-main-link" href="javascript:void(0)">
+                                    <span class="nav-main-link-name">Another Link</span>
+                                </a>
+                                </li>
+                                <li class="nav-main-item">
+                                <a class="nav-main-link" href="javascript:void(0)">
+                                    <span class="nav-main-link-name">Another Link</span>
+                                </a>
+                                </li>
+                                <li class="nav-main-item">
+                                <a class="nav-main-link" href="javascript:void(0)">
+                                    <span class="nav-main-link-name">Another Link</span>
+                                </a>
+                                </li>
+                            </ul>
+                            </li>
+                        </ul>
+                        </li>
+                        <li class="nav-main-item">
+                        <a class="nav-main-link" href="bd_search.html">
+                            <i class="nav-main-link-icon fa fa-search"></i>
+                            <span class="nav-main-link-name">Search</span>
+                        </a>
+                        </li>
+                        <li class="nav-main-item">
+                        <a class="nav-main-link" href="be_pages_dashboard.html">
+                            <i class="nav-main-link-icon fa fa-undo"></i>
+                            <span class="nav-main-link-name">Go Back</span>
+                        </a>
+                        </li>
+                        <li class="nav-main-heading">Extra</li>
+                        <li class="nav-main-item ms-lg-auto">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon fa fa-brush"></i>
+                            <span class="nav-main-link-name d-lg-none">Themes</span>
+                        </a>
+                        <ul class="nav-main-submenu nav-main-submenu-right">
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="default" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-default"></i>
+                                <span class="nav-main-link-name">Default</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xwork.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xwork"></i>
+                                <span class="nav-main-link-name">xWork</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xmodern.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xmodern"></i>
+                                <span class="nav-main-link-name">xModern</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xeco.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xeco"></i>
+                                <span class="nav-main-link-name">xEco</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xsmooth.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xsmooth"></i>
+                                <span class="nav-main-link-name">xSmooth</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xinspire.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xinspire"></i>
+                                <span class="nav-main-link-name">xInspire</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xdream.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xdream"></i>
+                                <span class="nav-main-link-name">xDream</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xpro.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xpro"></i>
+                                <span class="nav-main-link-name">xPro</span>
+                            </a>
+                            </li>
+                            <li class="nav-main-item">
+                            <a class="nav-main-link" data-toggle="theme" data-theme="assets/css/themes/xplay.min.css" href="#">
+                                <i class="nav-main-link-icon fa fa-circle text-xplay"></i>
+                                <span class="nav-main-link-name">xPlay</span>
+                            </a>
+                            </li>
+                        </ul>
+                        </li>
+                    </ul>
+                    </div>
+                    <!-- END Main Navigation -->
+                </div>
+            </div>
+            <!-- END Navigation -->
+
+
+            <!-- Page Content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Slider with multiple images and center mode -->
+              <div class="block">
+                <div class="block-header block-header-default">
+                  <h3 class="block-title">
+                    <i class="fa fa-play fa-fw text-primary"></i> Multiple Images &amp; Center Mode
+                  </h3>
+                </div>
+                <div class="js-slider slick-nav-black slick-nav-hover" data-dots="true" data-arrows="true" data-slides-to-show="3" data-center-mode="true" data-autoplay="true" data-autoplay-speed="3000">
+                  <div>
+                    <img class="img-fluid" src="{% static 'assets/media/photos/photo15.jpg' %}" alt="">
+                  </div>
+                  <div>
+                    <img class="img-fluid" src="assets/media/photos/photo16.jpg" alt="">
+                  </div>
+                  <div>
+                    <img class="img-fluid" src="assets/media/photos/photo17.jpg" alt="">
+                  </div>
+                  <div>
+                    <img class="img-fluid" src="assets/media/photos/photo18.jpg" alt="">
+                  </div>
+                  <div>
+                    <img class="img-fluid" src="assets/media/photos/photo19.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+              <!-- END Slider with multiple images and center mode -->
+                    </div>
+                </div>
+            </div>
+            <!-- END Page Content -->
+        </main>
+        <!-- END Main Container -->
+        
+        {% include 'common/web/footer.html' %}
+    </div>
+
+    {% include 'common/js_files.html' %}
+</body>
+</html>
