@@ -7,7 +7,7 @@
 
         <title>
         {% block title_principal %}
-            
+            home
         {% endblock title_principal %}
         </title>
 
@@ -83,7 +83,7 @@
 
     -->
 
-    <div id="page-container" class="page-header-dark main-content-boxed">
+    <div id="page-container" class=" enable-page-overlay side-scroll page-header-fixed main-content-narrow">
         
         {% include 'common/web/header.html' %}
         
@@ -95,32 +95,19 @@
             <!-- END Navigation -->
 
 
-            <!-- Page Content -->
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Slider with multiple images and center mode -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Card Title</h3>
-                            </div>
-                            <div class="card-body">
-                                <p>This is the content of the card. You can add any text or HTML elements here.</p>
-                            </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary">Action</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END Page Content -->
+            
+            {% block content %}
+            
+            {% endblock content %}
+              
         </main>
         <!-- END Main Container -->
         
         {% include 'common/web/footer.html' %}
     </div>
 
+    
     {% include 'common/js_files.html' %}
+
 </body>
 </html>
