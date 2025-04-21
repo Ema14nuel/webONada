@@ -1,27 +1,65 @@
 {% extends 'common/web/base.html' %}
 {% load static %}
 
-{% block title_principal %}
-    Inicio
-{% endblock title_principal %}
-    
 
-{% block content %}
+{% block content_principal %}
 <!-- Page Content -->
-<div class="content">    
-	<div class="row">
-		<div class="col-md-12">
-			<div class="block block-rounded block-bordered">
-				<div class="block-header block-header-default">
-					<h3 class="block-title">Title <small>Subtitle</small></h3>
-				</div>
-				<div class="block-content">
-					<p>Bordered block with header background..</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Slider with multiple images and center mode -->
+            <div class="block">
+                <div class="js-slider slick-nav-black slick-nav-hover" data-dots="true" data-arrows="true"
+                    data-slides-to-show="3" data-center-mode="true" data-autoplay="true" data-autoplay-speed="3000">
+                    <div>
+                        <img class="img-fluid" src="{% static 'assets/media/photos/photo15.jpg' %}" alt="">
+                    </div>
+                    <div>
+                        <img class="img-fluid" src="{% static 'assets/media/photos/photo16.jpg' %}" alt="">
+                    </div>
+                    <div>
+                        <img class="img-fluid" src="{% static 'assets/media/photos/photo17.jpg' %}" alt="">
+                    </div>
+                    <div>
+                        <img class="img-fluid" src="{% static 'assets/media/photos/photo18.jpg' %}" alt="">
+                    </div>
+                    <div>
+                        <img class="img-fluid" src="{% static 'assets/media/photos/photo19.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <!-- Slider with multiple images and center mode -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Card Title</h3>
+                </div>
+                <div class="card-body">
+                    <p>This is the content of the card. You can add any text or HTML elements here.</p>
+                </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-primary">Action</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- END Page Content -->
-{% endblock content %}
-    
+{% endblock content_principal %}
+
+
+
+
+{% block extra_scripts %}
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/slick-carousel/slick.min.js' %}"></script>
+
+<!-- Page JS Helpers (Slick Slider Plugin) -->
+<script>Dashmix.helpersOnLoad(['jq-slick']);</script>
+
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready!");
+    });
+</script>
+{% endblock extra_scripts %}

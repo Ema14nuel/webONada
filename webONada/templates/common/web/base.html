@@ -93,13 +93,11 @@
             <!-- Navigation -->
             {% include 'common/web/menu.html' %}
             <!-- END Navigation -->
-
-
             
-            {% block content %}
-            
-            {% endblock content %}
+            {% block content_principal %}
               
+            {% endblock content_principal %}
+            
         </main>
         <!-- END Main Container -->
         
@@ -109,5 +107,7 @@
     
     {% include 'common/js_files.html' %}
 
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
 </body>
 </html>

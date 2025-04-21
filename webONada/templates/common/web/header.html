@@ -5,7 +5,7 @@
       <!-- Left Section -->
       <div class="d-flex align-items-center">
         <!-- Logo -->
-        <a class="fw-semibold text-dual tracking-wide" href="index.html">
+        <a class="fw-semibold text-dual tracking-wide" href="#">
           Dash<span class="opacity-75">mix</span>
           <span class="fw-normal">Boxed</span>
         </a>
@@ -29,15 +29,15 @@
             <i class="fa fa-angle-down opacity-50 ms-1"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
-            <div class="rounded-top fw-semibold text-white bg-image" style="background-image: url('assets/media/photos/photo20.jpg');">
+            <div class="rounded-top fw-semibold text-white bg-image" style="background-image: url('{% static "assets/media/photos/photo20.jpg" %}');">
               <div class="p-3 bg-black-50 rounded-top">
-                <div class="d-flex align-items-center">
-                  <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/media/avatars/avatar3.jpg" alt="">
-                  <div class="ms-3">
-                    <a class="text-white fw-semibold" href="be_pages_generic_profile.html">Carol Ray</a>
-                    <div class="fs-sm text-white-75">c.ray@example.com</div>
-                  </div>
+              <div class="d-flex align-items-center">
+                <img class="img-avatar img-avatar48 img-avatar-thumb" src="{% static 'assets/media/avatars/avatar3.jpg' %}" alt="">
+                <div class="ms-3">
+                <a class="text-white fw-semibold" href="be_pages_generic_profile.html">Carol Ray</a>
+                <div class="fs-sm text-white-75">c.ray@example.com</div>
                 </div>
+              </div>
               </div>
             </div>
             <div class="p-2">
