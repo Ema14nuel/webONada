@@ -93,28 +93,11 @@
             <!-- Navigation -->
             {% include 'common/web/menu.html' %}
             <!-- END Navigation -->
-
-
-            <!-- Page Content -->
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Slider with multiple images and center mode -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Card Title</h3>
-                            </div>
-                            <div class="card-body">
-                                <p>This is the content of the card. You can add any text or HTML elements here.</p>
-                            </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary">Action</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END Page Content -->
+            
+            {% block content_principal %}
+              
+            {% endblock content_principal %}
+            
         </main>
         <!-- END Main Container -->
         
@@ -122,5 +105,8 @@
     </div>
 
     {% include 'common/js_files.html' %}
+
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
 </body>
 </html>
