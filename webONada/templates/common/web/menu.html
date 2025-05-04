@@ -18,7 +18,7 @@
         <div id="horizontal-navigation-hover-normal" class="d-none d-lg-block mt-2 mt-lg-0">
             <ul class="nav-main nav-main-horizontal nav-main-hover">
                 <li class="nav-main-item">
-                    <a class="nav-main-link active" href="javascript:void(0)">
+                    <a class="nav-main-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'sites:home' %}">
                         <i class="nav-main-link-icon fas fa-home"></i>
                         <span class="nav-main-link-name">Inicio</span>
                     </a>
@@ -30,7 +30,10 @@
                     </a>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link " href="javascript:void(0)">
+                    <a class="nav-main-link 
+                        {% if request.resolver_match.url_name == 'products' %}active{% endif %}
+                        {% if request.resolver_match.url_name == 'products_detail' %}active{% endif %}
+                        " href="{% url 'products:products' %}">
                         <i class="nav-main-link-icon fas fa-box-open"></i>
                         <span class="nav-main-link-name">Productos</span>
                     </a>
@@ -314,5 +317,3 @@
         <!-- END Navigation -->
     </div>
 </div>
-
-

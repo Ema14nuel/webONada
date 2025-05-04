@@ -1,0 +1,54 @@
+{% extends 'common/web/base.html' %}
+{% load static %}
+
+{% block title_principal %}
+    Productos
+{% endblock title_principal %}
+
+
+{% block content_principal %}
+<!-- Page Content -->
+<div class="content">
+    <div class="block block-rounded">
+        <div class="block-content">
+            <div class="py-4 text-center">
+                <h1 class="mb-2">Productos</h1>
+                <h2 class="h4 fw-normal text-muted">Welcome to your app, everything looks great!</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="block block-rounded">
+                <div class="block-content">
+                <p class="text-center py-6">...</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="block block-rounded">
+                <div class="block-content">
+                <p class="text-center py-6">...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_principal %}
+
+
+
+
+{% block extra_scripts %}
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/slick-carousel/slick.min.js' %}"></script>
+
+<!-- Page JS Helpers (Slick Slider Plugin) -->
+<script>Dashmix.helpersOnLoad(['jq-slick']);</script>
+
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready!");
+    });
+</script>
+{% endblock extra_scripts %}
