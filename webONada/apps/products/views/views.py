@@ -24,8 +24,16 @@ def products(request):
     return render(request, 'products/products.html', context)
 
 # site products details
-def products_datail(request):
+def products_detail(request, pk):
     """
     Render the services page.
     """
-    return render(request, 'products/products_detail.html')
+
+    # listado de productos
+    products = ProductPresentation.objects.get(id=pk)
+
+    context = {
+        'products': products,
+    }
+
+    return render(request, 'products/products_detail.html', context)

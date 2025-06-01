@@ -62,7 +62,6 @@ class ProductPresentation(models.Model):
     def __str__(self):
         return f"Presentation of {self.product.name}"
     
-
 class ProductRating(models.Model):
     product = models.ForeignKey(Product, related_name='ratings', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)

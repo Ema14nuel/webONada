@@ -55,23 +55,25 @@
                                 {% endif %}
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">{{ presentation.featured_title|default:presentation.product.name }}</h5>
-                                    <p class="card-text text-truncate">{{ presentation.short_description|default:presentation.product.description|truncatechars:100 }}</p>
                                     {% if presentation.price %}
-                                        <p class="product-price fs-4 text-success fw-bold">${{ presentation.price|floatformat:2 }}</p>
+                                        <p class="product-price fs-4 text-success fw-bold">${{ presentation.price }}</p>
                                     {% else %}
                                         <p class="product-price text-muted">Precio no disponible</p>
                                     {% endif %}
-                                    <button type="button" class="btn btn-primary btn-sm mt-auto" data-bs-toggle="modal" data-bs-target="#product-{{presentation.id}}">
-                                        Ver Detalles
-                                    </button>
+                                    <div class="d-flex gap-2 mt-auto">
+                                        <button type="button" class="btn btn-primary btn-sm d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#product-{{presentation.id}}">
+                                            <i class="fa fa-eye me-1"></i> Vista Previa
+                                        </button>
+                                        <a href="{% url 'products:products_detail' presentation.id  %}" class="btn btn-success btn-sm d-flex align-items-center">
+                                            <i class="fa fa-info-circle me-1"></i> Ver Detalle
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        
-
                         <!-- Modal -->
-                        <div class="modal fade" id="product-{{presentation.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="product-{{presentation.id}}"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog  modal-xl">
                             <div class="modal-content">
                             <div class="modal-header">
@@ -79,125 +81,67 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="container my-5">
+                                <div class="container">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home & Home Theatre</a></li>
-                                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Televisions</a></li>
-                                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">60 - 69 Inch TVs</a></li>
+                                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">{{presentation.product.category.name}}</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">{{presentation.featured_title}}</li>
                                         </ol>
                                     </nav>
 
-                                    <h1 class="h3 mb-4">{{presentation.featured_title}}</h1>
+                                    <h1 class="h3 mb-2">{{presentation.featured_title}}</h1>
 
                                     <div class="d-flex align-items-center mb-3">
-                                        <div class="text-warning me-2">
+                                        <!--<div class="text-warning me-2">
                                             &#9733;&#9733;&#9733;&#9733;&#9734;
                                         </div>
                                         <a href="#" class="text-decoration-none me-3">4.7 (20 reviews)</a>
                                         <a href="#" class="text-decoration-none me-3">Write your review</a>
-                                        <span class="text-muted me-3">Model Number: QN65Q80BAFXZC</span>
-                                        <span class="text-muted">Web Code: 16009717</span>
+                                        <span class="text-muted me-3">Modelo: {{presentation.product.category.sku}}</span>-->
+                                        <span class="text-muted" >Código: <b class="text-danger">{{presentation.product.category.sku}}-{{presentation.id}}</b></span>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-7">
                                             <div class="card mb-4">
                                                 <div class="card-body text-center">
-                                                    <img src="{{ presentation.featured_image.url }}" class="product-image img-fluid" alt="{{presentation.featured_title|default:presentation.product.name}}">
+                                                    <img src="{{ presentation.featured_image.url }}" class="product-image img-fluid" alt="{{ presentation.featured_title|default:presentation.product.name }}" >
                                                 </div>
                                             </div>
-                                            <div class="row gx-2">
-                                            
-                                                <div class="col-2">
-                                                    <img src="image_a6fec7.jpg" class="thumbnail-img active" alt="Thumbnail 1">
-                                                </div>
-                                                
-                                            </div>
-                                            <p class="text-center mt-2">1 of 7</p>
                                         </div>
 
                                         <div class="col-lg-5">
-                                            <div class="d-flex justify-content-end mb-3">
+                                            <!--<div class="d-flex justify-content-end mb-3">
                                                 <span class="save-badge">SAVE $300</span>
-                                            </div>
-                                            <p class="h2 text-danger mb-0">$1,599<sup>99</sup></p>
-                                            <p class="text-muted mb-3"><span class="price-old">$1,899<sup>99</sup></span> SALE ends: August 11, 2022</p>
-
-                                            <div class="alert alert-info d-flex align-items-center mb-3" role="alert">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill flex-shrink-0 me-2" viewBox="0 0 16 16">
-                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34-.34.658-.73.658h-.002c-.39 0-.66-.318-.73-.658l-1-4.705A1.897 1.897 0 0 1 6 5h2a1.897 1.897 0 0 1 1.93 1.588zM8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                                                </svg>
-                                                <div>
-                                                    <strong>10 Special Offers Available</strong>
-                                                    <ul class="list-unstyled mb-0 mt-2">
-                                                        <li>• Save $30 on the Sanus Advanced 42" - 90" Tilting TV Wall Mount with the purchase of any TV.*</li>
-                                                    </ul>
-                                                    <a href="#" class="text-decoration-none" data-bs-toggle="collapse" data-bs-target="#moreOffers" aria-expanded="false" aria-controls="moreOffers">Show more offers <span class="ms-1">&#9662;</span></a>
-                                                    <div class="collapse" id="moreOffers">
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex align-items-center mb-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-truck me-2" viewBox="0 0 16 16">
-                                                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h-1V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H11v-1h1v1.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 0 12.5zM15 5h1V3.5A1.5 1.5 0 0 0 14.5 2H13v3zm-4.5 0h-3V2h3z"/>
-                                                    <path d="M12.5 10a.5.5 0 0 1 .5.5V12h2a.5.5 0 0 1 0 1h-2v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V13h-2a.5.5 0 0 1 0-1h2v-.5a.5.5 0 0 1 .5-.5h1z"/>
-                                                </svg>
-                                                <span>Sold and shipped by Best Buy</span>
-                                            </div>
+                                            </div>-->
+                                            <p class="h2 text-success mb-3">$ {{presentation.price}}</p>
+                                            <!-- <p class="text-muted mb-3"><span class="price-old">$1,899<sup>99</sup></span> SALE ends: August 11, 2022</p>-->
 
                                             <div class="delivery-info mb-4">
-                                                <h5 class="mb-3">Scheduled Delivery</h5>
-                                                <p class="mb-2">Deliveries are scheduled for large or heavy items. Have them delivered in-home or to your doorstep. <a href="#" class="text-decoration-none">See details</a></p>
-                                                <p class="mb-2">Earliest delivery date for V6G is August 11, 2022.</p>
-                                                <p>Select your preferred delivery date at checkout.</p>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="V6G" aria-label="Delivery postcode" value="V6G">
-                                                    <button class="btn btn-outline-secondary" type="button">Search</button>
-                                                </div>
+                                                <h5 class="mb-3">{{presentation.featured_title}}</h5>
+                                                <p class="mb-2">{{presentation.short_description}}.</p>
                                             </div>
 
                                             <div class="d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shop me-2" viewBox="0 0 16 16">
                                                     <path d="M2.97 1A1 1 0 0 0 2 2v2h12V2a1 1 0 0 0-1-1zm3.915 2.147A3.017 3.017 0 0 1 8 4.5a3.017 3.017 0 0 1 1.115-1.353l-.707-.707a4.017 4.017 0 0 0-1.414 0l-.707.707zM1 5v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5zm12 0H3v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z"/>
                                                 </svg>
-                                                <span>Available for free store pickup</span>
+                                                <span>Disponible</span>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <hr class="my-5">
-
-                                    <div class="row">
-                                        <div class="col-lg-7">
-                                            <h3>Overview</h3>
-                                            <p>With this Samsung 65-inch Smart TV in your living room, you'll be fully immersed in your favourite movies, TV shows, video games, and more. It features a 4K Ultra HD screen with QLED technology for stunning visuals and a 120Hz refresh rate for ultra-clear, lag-free performance. Connect effortlessly to your media devices for hours of entertainment.</p>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="card p-3">
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <img src="https://via.placeholder.com/50x50" class="rounded-circle me-3" alt="Samsung Best Buy Expert">
-                                                    <div>
-                                                        <p class="mb-0 fw-bold">Have a product question?</p>
-                                                        <small>Check back later for advice from a Best Buy Samsung expert.</small>
-                                                    </div>
-                                                </div>
-                                                <div class="alert alert-warning py-2 px-3 mb-0" role="alert">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-fill me-2" viewBox="0 0 16 16">
-                                                        <path d="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a.5.5 0 0 1 .4.2L7 14.333a.5.5 0 0 0 .8-.4V12.5a.5.5 0 0 1 .5-.5h2.5a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a1.5 1.5 0 0 0-1.2.6l-1.5 2.5a.5.5 0 0 1-.8 0l-1.5-2.5a1.5 1.5 0 0 0-1.2-.6H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
-                                                    </svg>
-                                                    Chat is unavailable
-                                                </div>
+                                        <div class="row">
+                                            <h4 class="text-center">Galería de Imágenes</h4>
+                                            {% for image in presentation.product.images.all %}
+                                            <div class="col-2">
+                                                <img src="{{image.image.url}}" class="product-image img-fluid thumbnail-img active" alt="{{image.image.}}">
                                             </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Understood</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                             </div>
                         </div>
