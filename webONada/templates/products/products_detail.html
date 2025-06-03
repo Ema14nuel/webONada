@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title_principal %}
-    Productos
+    {{products.product.category.sku}}-{{products.id}} | {{products.featured_title}}
 {% endblock title_principal %}
 
 
@@ -12,20 +12,228 @@
     <div class="block block-rounded">
         <div class="block-content">
             <div class="py-4 text-center">
-                <h1 class="mb-2">Productos Detalle</h1>
-                <h2 class="h4 fw-normal text-muted">Welcome to your app, everything looks great!</h2>
+                <h1 class="mb-2">{{products.product.category.sku}}-{{products.id}} | {{products.featured_title}}</h1>
+                <h2 class="h4 fw-normal text-muted">Detalle producto: {{products.featured_title}}</h2>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-content">
-                <p class="text-center py-6">...</p>
+                    <div class="container mt-4">
+                        <div class="row  mb-5">
+                            {# Product Images Column #}
+                            <div class="col-md-6">
+                                <div class="row">
+                                    {# Main Product Image #}
+                                    <div class="col-12 mb-3">
+                                        {% if products.product.images.first %}
+                                            <img src="{{ products.featured_image.url }}" class="img-fluid rounded border" alt="{{ products.featured_image.url  }}">
+                                        {% else %}
+                                            <img src="https://via.placeholder.com/600x600?text=No+Image" class="img-fluid rounded border" alt="No image available">
+                                        {% endif %}
+                                    </div>
+                                    {# Thumbnail Images (if any) #}
+                                    <div class="col-12">
+                                        <div class="d-flex overflow-auto">
+                                            {% for image in products.product.images.all %}
+                                                <img src="{{ image.image.url }}" class="img-thumbnail me-2" style="width: 80px; height: 80px; object-fit: cover;" alt="{{ products.product.name }} thumbnail">
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# Product Details Column #}
+                            <div class="col-md-6">
+                                <h1 class="h3">{{ products.product.name }}</h1>
+                                <p class="text-muted small">Visita la tienda de Amazon Basics</p> {# You might want to link this to a seller/brand page #}
+
+                                {# Ratings Section #}
+                                <div class="d-flex align-items-center mb-3">
+                                    {% with avg_rating=products.product.ratings.all|default_if_none:0 %}
+                                        <div class="text-warning">
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= avg_rating %}
+                                                    <i class="bi bi-star-fill"></i>
+                                                {% else %}
+                                                    <i class="bi bi-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <span class="ms-2">{{ avg_rating|floatformat:1 }}</span>
+                                        <a href="#reviews" class="ms-2 text-decoration-none">({{ products.product.ratings.count }} calificaciones)</a>
+                                    {% endwith %}
+                                </div>
+
+                                <hr>
+
+                                {# Price Section #}
+                                <div class="mb-3">
+                                    <span class="fs-4 fw-bold text-danger">${{ products.price|floatformat:2 }}</span>
+                                    <span class="text-muted"> ({{ products.product.presentations.count }} unidades)</span>
+                                </div>
+
+                                <p class="text-muted">Sin cargos de importación y $31.52 de envío a Colombia <a href="#" data-bs-toggle="modal" data-bs-target="#shippingInfoModal">Detalles</a></p>
+                                <p class="text-muted">Disponible a un precio menor de <a href="#">otros vendedores</a> que podrían no ofrecer envío Prime gratis.</p>
+
+                                <dl class="row">
+                                    <dt class="col-sm-4">Marca</dt>
+                                    <dd class="col-sm-8">Amazon Basics</dd> {# You might want to link this to a brand field in your Product model if available #}
+
+                                    <dt class="col-sm-4">Color</dt>
+                                    <dd class="col-sm-8">Blanco</dd> {# Add a 'color' field to Product or ProductPresentation #}
+
+                                    <dt class="col-sm-4">Características especiales</dt>
+                                    <dd class="col-sm-8">Apto para Congelador</dd> {# Add a 'special_features' field (e.g., ManyToManyField to a 'Feature' model) #}
+
+                                    <dt class="col-sm-4">Estilo</dt>
+                                    <dd class="col-sm-8">Taza de café</dd> {# Add a 'style' field #}
+
+                                    <dt class="col-sm-4">Tema</dt>
+                                    <dd class="col-sm-8">Comida</dd> {# Add a 'theme' field #}
+                                </dl>
+
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="me-3">
+                                        <i class="bi bi-box-seam fs-4"></i>
+                                        <span class="ms-1">Material:</span>
+                                        <span class="fw-bold">Porcelana</span> {# Add a 'material' field #}
+                                    </div>
+                                    <div>
+                                        <i class="bi bi-cup fs-4"></i>
+                                        <span class="ms-1">Capacidad:</span>
+                                        <span class="fw-bold">12 Onzas</span> {# Add a 'capacity' field #}
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="mb-3">
+                                    <label for="quantity" class="form-label">Cantidad:</label>
+                                    <select class="form-select w-auto" id="quantity">
+                                        {% for i in "12345"|make_list %} {# Assuming max quantity 5 for example, adjust as needed #}
+                                            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                {% if products.stock > 0 %}
+                                    <button class="btn btn-warning btn-lg w-100 mb-2"><i class="bi bi-cart-plus me-2"></i>Agregar al Carrito</button>
+                                    <button class="btn btn-outline-warning btn-lg w-100">Comprar ahora</button>
+                                {% else %}
+                                    <p class="text-danger fw-bold">Producto Agotado</p>
+                                    <button class="btn btn-secondary btn-lg w-100 mb-2" disabled>Agregar al Carrito</button>
+                                    <button class="btn btn-secondary btn-lg w-100" disabled>Comprar ahora</button>
+                                {% endif %}
+
+                                <div class="mt-3 small">
+                                    <p>Enviado por <span class="fw-bold">Amazon.com</span></p> {# You might want to display your actual seller #}
+                                    <p>Vendido por <span class="fw-bold">Amazon.com</span></p> {# You might want to display your actual seller #}
+                                    <p>Devoluciones: <a href="#">Reintegro o reemplazo en 30 días</a></p>
+                                    <p>Empaque: <a href="#">Se envía sin empaque adicional de Amazon</a></p>
+                                </div>
+                                <a href="#" class="small text-decoration-none" data-bs-toggle="collapse" data-bs-target="#moreInfo" aria-expanded="false" aria-controls="moreInfo">
+                                    <i class="bi bi-caret-down-fill me-1"></i>Ver más
+                                </a>
+                                <div class="collapse" id="moreInfo">
+                                    <div class="card card-body mt-2">
+                                        <p>
+                                            <i class="bi bi-gift-fill me-1"></i>
+                                            <a href="#">Agregar un recibo de regalo</a> para facilitar las devoluciones
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-5">
+
+                        {# About This Item Section #}
+                        <div class="row mb-5">
+                            <div class="col-md-8 offset-md-2">
+                                <h2 class="h4 mb-3">Sobre este artículo</h2>
+                                {{ products.product.description|safe }} {# Assuming description can contain HTML, use 'safe' filter #}
+                                <ul class="list-unstyled mt-3">
+                                    {% if products.short_description %}
+                                    <li>{{ products.short_description }}</li>
+                                    {% endif %}
+                                    <li>Juego de 12 tazas de café de porcelana premium de 12 onzas para servicio de alimentos, incluyendo restaurantes, catering, fiestas y uso diario</li>
+                                    <li>Construcción de alta temperatura, sin plomo que soporta hasta 1380 grados; apto para horno, microondas y congelador</li>
+                                    <li>Diseño resistente y duradero con una construcción reforzada</li>
+                                    <li>El color blanco acabado proporciona un aspecto limpio y atemporal que complementa una variedad de estilos y opciones de decoración</li>
+                                    <li>Apilable para un fácil almacenamiento; se recomienda lavar a mano</li>
+                                    <li>Anteriormente marca AmazonComercial ahora Amazon Basics</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {# Product Description (Full) - if different from 'About this item' #}
+                        {% if products.product.description %}
+                        <div class="row mb-5">
+                            <div class="col-md-8 offset-md-2">
+                                <h2 class="h4 mb-3">Descripción del Producto</h2>
+                                <p>{{ products.product.description }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {# Customer Reviews Section #}
+                        <div class="row mb-5" id="reviews">
+                            <div class="col-md-8 offset-md-2">
+                                <h2 class="h4 mb-3">Opiniones de Clientes</h2>
+                                {% if products.product.ratings.exists %}
+                                    {% for rating in products.product.ratings.all %}
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ rating.user.username }}</h5>
+                                                <div class="text-warning mb-2">
+                                                    {% for i in "12345"|make_list %}
+                                                        {% if forloop.counter <= rating.rating %}
+                                                            <i class="bi bi-star-fill"></i>
+                                                        {% else %}
+                                                            <i class="bi bi-star"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <p class="card-text">{{ rating.review }}</p>
+                                                <p class="card-subtitle text-muted small">
+                                                    <small>{{ rating.created_at|date:"d M Y" }}</small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>Este producto no tiene opiniones todavía. ¡Sé el primero en calificarlo!</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {# Shipping Info Modal #}
+                    <div class="modal fade" id="shippingInfoModal" tabindex="-1" aria-labelledby="shippingInfoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="shippingInfoModalLabel">Información de Envío</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Detalles sobre los cargos de importación y el envío a Colombia.</p>
+                                    {# Add more specific shipping information here #}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-content">
                     
