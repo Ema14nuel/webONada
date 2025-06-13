@@ -1,8 +1,19 @@
 from django.shortcuts import render
+from apps.products.models import Product, Category, ProductPresentation, ProductImage
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+
+    """
+    Render the home page.
+    """
+    pictures_banner = ProductImage.objects.filter(image_type='3').order_by('id')
+    
+    context = {
+        'pictures_banner': pictures_banner,
+    }
+
+    return render(request, 'home.html', context)
 
 # site about
 def about(request):

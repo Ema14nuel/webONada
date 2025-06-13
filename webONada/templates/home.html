@@ -14,6 +14,12 @@
             <div class="block">
                 <div class="js-slider slick-nav-black slick-nav-hover" data-dots="true" data-arrows="true"
                     data-slides-to-show="3" data-center-mode="true" data-autoplay="true" data-autoplay-speed="3000">
+                    {% for picture in pictures_banner %}
+                        <div>
+                            <img class="img-fluid" src="{{ picture.image.url }}" alt="">
+                        </div>
+                    {% endfor %}
+                    <!-- 
                     <div>
                         <img class="img-fluid" src="{% static 'assets/media/photos/photo15.jpg' %}" alt="">
                     </div>
@@ -29,6 +35,7 @@
                     <div>
                         <img class="img-fluid" src="{% static 'assets/media/photos/photo19.jpg' %}" alt="">
                     </div>
+                    -->
                 </div>
             </div>
         </div>
