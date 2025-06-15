@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from apps.products.models import Product, Category, ProductPresentation, ProductImage
+from apps.products.models import Product, Category, ProductPresentation, ProductImage, ProductPresentationImage
 
 # Create your views here.
 def home(request):
@@ -7,10 +7,20 @@ def home(request):
     """
     Render the home page.
     """
-    pictures_banner = ProductImage.objects.filter(image_type='3').order_by('id')
     
+
+    pictures_banner = ProductPresentationImage.objects.select_related(
+        'product'
+    ).filter(image_type='3').order_by('id')
+
+    categories = Category.objects.all()
+
+    featured_presentations = ProductPresentation.objects.filter(featured=True, active=True)
+
     context = {
         'pictures_banner': pictures_banner,
+        'categories' : categories,
+        'featured_presentations': featured_presentations,
     }
 
     return render(request, 'home.html', context)

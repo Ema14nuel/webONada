@@ -120,11 +120,11 @@
                                 <hr>
                                 <h3 class="text-center w-100 mb-3" style="margin-bottom: 1.5rem;">Galería de imágenes de producto</h3>
                                 <div class="d-flex overflow-auto">
-                                    {% for image in products.product.images.all %}
+                                    {% for image in products.images.all %}
                                         <img src="{{ image.image.url }}"
                                             class="img-thumbnail me-2"
                                             style="width: 80px; height: 80px; object-fit: cover; cursor:pointer;"
-                                            alt="{{ products.product.name }} thumbnail"
+                                            alt="{{ products.featured_title }} thumbnail"
                                             data-bs-toggle="modal" data-bs-target="#galleryModal">
 
                                         {% if forloop.first %}
@@ -139,18 +139,17 @@
                                                             <img id="galleryModalImage" src="" class="img-fluid rounded shadow mb-3" style="max-height:80vh; max-width:95vw;" alt="Imagen de producto">
                                                             <!-- Modal Gallery Thumbnails (bottom, centered) -->
                                                             <div class="d-flex justify-content-center align-items-center mt-3" style="gap: 1rem;">
-                                                                {% for image in products.product.images.all %}
+                                                                {% for image in products.images.all %}
                                                                     <img src="{{ image.image.url }}"
                                                                         class="img-thumbnail gallery-modal-thumb"
                                                                         style="width: 80px; height: 80px; object-fit: cover; cursor:pointer; border: 2px solid transparent;"
                                                                         data-gallery-index="{{ forloop.counter0 }}"
-                                                                        alt="{{ products.product.name }} thumbnail">
+                                                                        alt="{{ products.featured_title }} thumbnail">
                                                                 {% endfor %}
                                                             </div>
                                                             <script>
-                                                                // Collect all image URLs
                                                                 var galleryImages = [
-                                                                    {% for image in products.product.images.all %}
+                                                                    {% for image in products.images.all %}
                                                                         "{{ image.image.url }}"{% if not forloop.last %},{% endif %}
                                                                     {% endfor %}
                                                                 ];
@@ -162,7 +161,6 @@
                                                                     var galleryModal = document.getElementById('galleryModal');
                                                                     var modalThumbs = document.querySelectorAll('.gallery-modal-thumb');
 
-                                                                    // When any thumbnail (outside modal) is clicked
                                                                     thumbnails.forEach(function(thumb, idx) {
                                                                         thumb.addEventListener('click', function() {
                                                                             currentIndex = idx;
@@ -171,7 +169,6 @@
                                                                         });
                                                                     });
 
-                                                                    // When any modal thumbnail is clicked
                                                                     modalThumbs.forEach(function(thumb, idx) {
                                                                         thumb.addEventListener('click', function(e) {
                                                                             currentIndex = idx;
@@ -185,20 +182,6 @@
                                                                             thumb.style.borderColor = (idx === currentIndex) ? '#0d6efd' : 'transparent';
                                                                         });
                                                                     }
-
-                                                                    // Next/Prev buttons
-                                                                    document.getElementById('galleryNext').addEventListener('click', function(e) {
-                                                                        e.stopPropagation();
-                                                                        currentIndex = (currentIndex + 1) % galleryImages.length;
-                                                                        modalImage.src = galleryImages[currentIndex];
-                                                                        highlightModalThumb();
-                                                                    });
-                                                                    document.getElementById('galleryPrev').addEventListener('click', function(e) {
-                                                                        e.stopPropagation();
-                                                                        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-                                                                        modalImage.src = galleryImages[currentIndex];
-                                                                        highlightModalThumb();
-                                                                    });
 
                                                                     // Keyboard navigation
                                                                     galleryModal.addEventListener('shown.bs.modal', function () {
@@ -226,66 +209,9 @@
                                                                 });
                                                             </script>
                                                         </div>
-                                                        
                                                     </div>
                                                 </div>
                                             </div>
-                                            <script>
-                                                // Collect all image URLs
-                                                var galleryImages = [
-                                                    {% for image in products.product.images.all %}
-                                                        "{{ image.image.url }}"{% if not forloop.last %},{% endif %}
-                                                    {% endfor %}
-                                                ];
-                                                var currentIndex = 0;
-
-                                                // When any thumbnail is clicked
-                                                document.addEventListener('DOMContentLoaded', function() {
-                                                    var thumbnails = document.querySelectorAll('[data-bs-target="#galleryModal"]');
-                                                    var modalImage = document.getElementById('galleryModalImage');
-                                                    var galleryModal = document.getElementById('galleryModal');
-
-                                                    thumbnails.forEach(function(thumb, idx) {
-                                                        thumb.addEventListener('click', function() {
-                                                            currentIndex = idx;
-                                                            modalImage.src = galleryImages[currentIndex];
-                                                        });
-                                                    });
-
-                                                    // Next/Prev buttons
-                                                    document.getElementById('galleryNext').addEventListener('click', function(e) {
-                                                        e.stopPropagation();
-                                                        currentIndex = (currentIndex + 1) % galleryImages.length;
-                                                        modalImage.src = galleryImages[currentIndex];
-                                                    });
-                                                    document.getElementById('galleryPrev').addEventListener('click', function(e) {
-                                                        e.stopPropagation();
-                                                        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-                                                        modalImage.src = galleryImages[currentIndex];
-                                                    });
-
-                                                    // Keyboard navigation
-                                                    galleryModal.addEventListener('shown.bs.modal', function () {
-                                                        document.addEventListener('keydown', handleKeydown);
-                                                    });
-                                                    galleryModal.addEventListener('hidden.bs.modal', function () {
-                                                        document.removeEventListener('keydown', handleKeydown);
-                                                    });
-
-                                                    function handleKeydown(e) {
-                                                        if (e.key === 'ArrowRight') {
-                                                            currentIndex = (currentIndex + 1) % galleryImages.length;
-                                                            modalImage.src = galleryImages[currentIndex];
-                                                        } else if (e.key === 'ArrowLeft') {
-                                                            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-                                                            modalImage.src = galleryImages[currentIndex];
-                                                        } else if (e.key === 'Escape') {
-                                                            var modal = bootstrap.Modal.getInstance(galleryModal);
-                                                            modal.hide();
-                                                        }
-                                                    }
-                                                });
-                                            </script>
                                         {% endif %}
                                     {% endfor %}
                                 </div>

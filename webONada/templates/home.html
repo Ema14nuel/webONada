@@ -6,6 +6,61 @@
 {% endblock title_principal %}
 
 {% block content_principal %}
+<style>
+/* The container helps position the text and button relative to the image */
+        .image-container {
+            position: relative; /* This is key for positioning child elements */
+            width: 100%; /* Or set a specific width */
+            max-width: 600px; /* Example: adjust as needed */
+            margin: 0 auto; /* Center the container */
+        }
+
+        .image-container img {
+            width: 100%; /* Make the image fill the container */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below image */
+        }
+
+        /* Style for the overlay content (text and button) */
+        .overlay-content {
+            position: absolute; /* Position relative to the .image-container */
+            bottom: 0; /* Place at the bottom of the container */
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+            color: white; /* Text color */
+            padding: 15px; /* Spacing around the text and button */
+            box-sizing: border-box; /* Include padding in the width */
+            text-align: center; /* Center the text and button */
+        }
+
+        .overlay-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5em; /* Adjust font size as needed */
+        }
+
+        .overlay-content p {
+            margin-bottom: 15px;
+            font-size: 1em; /* Adjust font size as needed */
+            line-height: 1.5;
+        }
+
+        .overlay-content .btn {
+            display: inline-block; /* Allows padding and margin */
+            background-color: #007bff; /* Button background color */
+            color: white; /* Button text color */
+            padding: 10px 20px;
+            text-decoration: none; /* Remove underline from link */
+            border-radius: 5px; /* Rounded corners for the button */
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+        }
+
+        .overlay-content .btn:hover {
+            background-color: #0056b3; /* Darker background on hover */
+        }
+</style>
+
 <!-- Page Content -->
 <div class="content">
     <div class="row">
@@ -15,30 +70,130 @@
                 <div class="js-slider slick-nav-black slick-nav-hover" data-dots="true" data-arrows="true"
                     data-slides-to-show="3" data-center-mode="true" data-autoplay="true" data-autoplay-speed="3000">
                     {% for picture in pictures_banner %}
-                        <div>
-                            <img class="img-fluid" src="{{ picture.image.url }}" alt="">
+                        <div class="image-container">
+                            <img src="{{ picture.image.url }}" alt="{{ picture.image.url }}">
+
+                            <div class="overlay-content">
+                                <h3>{{ picture.product.featured_title }}</h3>
+                                <a href="{% url 'products:products_detail' picture.product.id  %}" class="btn">Ver</a>
+                            </div>
                         </div>
                     {% endfor %}
-                    <!-- 
-                    <div>
-                        <img class="img-fluid" src="{% static 'assets/media/photos/photo15.jpg' %}" alt="">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'assets/media/photos/photo16.jpg' %}" alt="">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'assets/media/photos/photo17.jpg' %}" alt="">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'assets/media/photos/photo18.jpg' %}" alt="">
-                    </div>
-                    <div>
-                        <img class="img-fluid" src="{% static 'assets/media/photos/photo19.jpg' %}" alt="">
-                    </div>
-                    -->
+                    
                 </div>
             </div>
         </div>
+
+        <div class="col-md-12 my-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Categorías</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for category in categories %}
+                            <div class="col-md-2 mb-4">
+                                <a href="#" class="category-link" style="text-decoration: none;">
+                                    <div class="card h-100 border border-secondary category-card" style="overflow: hidden;">
+                                        <div class="position-relative category-image-container" style="width: 100%; aspect-ratio: 1/1; background: #f8f9fa;">
+                                            {% if category.image %}
+                                                <img src="{{ category.image.url }}" class="card-img-top w-100 h-100 category-img" alt="{{ category.name }}" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; transition: transform 0.3s, filter 0.3s;">
+                                            {% else %}
+                                                <img src="{% static 'assets/img/default-category.png' %}" class="card-img-top w-100 h-100 category-img" alt="Sin imagen" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; transition: transform 0.3s, filter 0.3s;">
+                                            {% endif %}
+                                            <!-- Overlay for text with dark background behind text only -->
+                                            <div class="position-absolute bottom-0 start-0 w-100 px-2 pb-2" style="z-index:2;">
+                                                <div class="category-text-bg px-2 py-2 rounded text-center" style="background: rgba(0,0,0,0.65);">
+                                                    <h5 class="card-title mb-2 text-white text-uppercase" style="text-shadow: 0 1px 2px rgba(0,0,0,0.7); letter-spacing: 1px;">
+                                                        {{ category.name|upper }}
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <style>
+                                    .category-link:hover .category-img {
+                                        transform: scale(1.07);
+                                        filter: brightness(0.7);
+                                    }
+                                </style>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <p class="text-center text-muted">No hay categorías disponibles.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 my-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">Presentaciones Destacadas</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for presentation in featured_presentations %}
+                            <div class="col-md-2 mb-4">
+                                <div class="card h-100 border border-secondary">
+                                    <div class="position-relative" style="width: 100%; aspect-ratio: 1/1; background: #f8f9fa; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                        {% if presentation.featured_image %}
+                                            <img src="{{ presentation.featured_image.url }}" class="card-img-top w-100 h-100" alt="{{ presentation.product.featured_title }}" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0;">
+                                        {% else %}
+                                            <img src="{% static 'assets/img/default-product.png' %}" class="card-img-top w-100 h-100" alt="Sin imagen" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0;">
+                                        {% endif %}
+                                        <!-- Overlay for title inside the image -->
+                                        <div class="position-absolute bottom-0 start-0 w-100 px-2 pb-2" style="z-index:2;">
+                                            <div class="px-2 py-2 rounded text-center" style="background: rgba(0,0,0,0.65);">
+                                                <h5 class="mb-0 text-white text-uppercase" style="text-shadow: 0 1px 2px rgba(0,0,0,0.7); letter-spacing: 1px;">
+                                                    {{ presentation.featured_title }}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            {{ presentation.short_description|truncatewords:10|default_if_none:"" }}
+                                        </p>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a href="{% url 'products:products_detail' presentation.product.id %}" class="btn btn-outline-success btn-sm">Ver producto</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <p class="text-center text-muted">No hay presentaciones destacadas.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <style>
+            /* Estilos para el hover de las categorías */
+            .category-link:hover .category-img {
+                transform: scale(1.07);
+                filter: brightness(0.7);
+            }
+
+            /* Opcional: para añadir un efecto similar al pasar el ratón por los productos */
+            .product-card {
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            }
+
+            .product-card:hover {
+                transform: translateY(-5px); /* Slightly lift the card */
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhance shadow */
+            }
+        </style>
+
         <div class="col-md-12">
             <!-- Slider with multiple images and center mode -->
             <div class="card">

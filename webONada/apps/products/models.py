@@ -6,6 +6,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     sku = models.CharField(max_length=3, null=True, blank=True)
+    image = models.ImageField(upload_to='category_images/', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -40,7 +41,20 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-    
+class ProductPresentationImage(models.Model):
+    IMAGE_TYPE_CHOICES = [
+        ('1', 'Main'),
+        ('2', 'Secondary'),
+        ('3', 'Banner'),
+    ]
+    product = models.ForeignKey('ProductPresentation', related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images/')
+    image_type = models.CharField(max_length=10, choices=IMAGE_TYPE_CHOICES)
+
+    def __str__(self):
+        image_type_display = dict(self.IMAGE_TYPE_CHOICES).get(self.image_type, self.image_type)
+        return f"{self.product.featured_title} - {image_type_display}"
+
 class ProductPresentation(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='presentations')
     featured_title = models.CharField(max_length=255, blank=True, null=True, help_text="Featured title for the sales page")
@@ -60,7 +74,7 @@ class ProductPresentation(models.Model):
         verbose_name_plural = "Product Presentations"
 
     def __str__(self):
-        return f"Presentation of {self.product.name}"
+        return self.featured_title
     
 class ProductRating(models.Model):
     product = models.ForeignKey(Product, related_name='ratings', on_delete=models.CASCADE)
