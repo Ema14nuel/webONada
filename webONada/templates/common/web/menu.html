@@ -39,6 +39,15 @@
                     </a>
                 </li>
                 <li class="nav-main-item">
+                    <a class="nav-main-link 
+                        {% if request.resolver_match.url_name == 'categories' %}active{% endif %}
+                        {% if request.resolver_match.url_name == 'categories_detail' %}active{% endif %}
+                        " href="{% url 'products:categories' %}">
+                        <i class="nav-main-link-icon fas fa-th-list"></i>
+                        <span class="nav-main-link-name">Categorias</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
                     <a class="nav-main-link " href="javascript:void(0)">
                         <i class="nav-main-link-icon fas fa-headset"></i>
                         <span class="nav-main-link-name">Contacto</span>

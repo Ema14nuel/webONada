@@ -1,0 +1,65 @@
+{% extends 'common/web/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title_principal %}
+    Productos
+{% endblock title_principal %}
+
+
+{% block content_principal %}
+<!-- Page Content -->
+<div class="content">
+    <div class="block block-rounded">
+        <div class="block-content">
+            <div class="py-4 text-center">
+                <h1 class="mb-2">Categorias: {{ category.name }}</h1>
+                <h2 class="h4 fw-normal text-muted">{{ category.description }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 my-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Categorías</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mx-auto">
+                            <div class="card h-100">
+                                {% if category.image %}
+                                    <img src="{{ category.image.url }}" class="card-img-top" alt="{{ category.name }}">
+                                {% else %}
+                                    <img src="{% static 'images/default-category.png' %}" class="card-img-top" alt="Sin imagen">
+                                {% endif %}
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ category.name }}</h5>
+                                    <p class="card-text">{{ category.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_principal %}
+
+
+
+
+{% block extra_scripts %}
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/slick-carousel/slick.min.js' %}"></script>
+
+<!-- Page JS Helpers (Slick Slider Plugin) -->
+<script>Dashmix.helpersOnLoad(['jq-slick']);</script>
+
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready!");
+    });
+</script>
+{% endblock extra_scripts %}

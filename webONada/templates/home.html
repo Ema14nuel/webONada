@@ -64,22 +64,59 @@
 <!-- Page Content -->
 <div class="content">
     <div class="row">
-        <div class="col-md-12">
-            <!-- Slider with multiple images and center mode -->
-            <div class="block">
-                <div class="js-slider slick-nav-black slick-nav-hover" data-dots="true" data-arrows="true"
-                    data-slides-to-show="3" data-center-mode="true" data-autoplay="true" data-autoplay-speed="3000">
-                    {% for picture in pictures_banner %}
-                        <div class="image-container">
-                            <img src="{{ picture.image.url }}" alt="{{ picture.image.url }}">
+        
+        <div class="col-md-8">
+            <!-- Slider -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="card-title mb-0">Bienvenidos</h3>
+                </div>
+                <div class="card-body"><!-- Slider with multiple images and center mode -->
+                    <div class="block">
+                        <div class="js-slider slick-nav-black slick-nav-hover" data-dots="true" data-arrows="true"
+                            data-slides-to-show="3" data-center-mode="true" data-autoplay="true" data-autoplay-speed="3000">
+                            {% for picture in pictures_banner %}
+                                <div class="image-container">
+                                    <img src="{{ picture.image.url }}" alt="{{ picture.image.url }}">
 
-                            <div class="overlay-content">
-                                <h3>{{ picture.product.featured_title }}</h3>
-                                <a href="{% url 'products:products_detail' picture.product.id  %}" class="btn">Ver</a>
-                            </div>
+                                    <div class="overlay-content">
+                                        <h3>{{ picture.product.featured_title }}</h3>
+                                        <a href="{% url 'products:products_detail' picture.product.id  %}" class="btn">Ver</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
                         </div>
-                    {% endfor %}
-                    
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        
+        <div class="col-md-4">
+            <!-- Categorias -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title mb-0">Categorías</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for category in categories %}
+                            <li class="list-group-item d-flex align-items-center">
+                                {% if category.image %}
+                                    <img src="{{ category.image.url }}" alt="{{ category.name }}" class="rounded me-2" style="width:32px; height:32px; object-fit:cover;">
+                                {% else %}
+                                    <img src="{% static 'assets/img/default-category.png' %}" alt="Sin imagen" class="rounded me-2" style="width:32px; height:32px; object-fit:cover;">
+                                {% endif %}
+                                <a href="{% url 'products:categories_detail' category.id %}" style="text-decoration: none; color: inherit;">
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item text-muted text-center">No hay categorías disponibles.</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -93,7 +130,7 @@
                     <div class="row">
                         {% for category in categories %}
                             <div class="col-md-2 mb-4">
-                                <a href="#" class="category-link" style="text-decoration: none;">
+                                <a href="{% url 'products:categories_detail' category.id %}" class="category-link" style="text-decoration: none;">
                                     <div class="card h-100 border border-secondary category-card" style="overflow: hidden;">
                                         <div class="position-relative category-image-container" style="width: 100%; aspect-ratio: 1/1; background: #f8f9fa;">
                                             {% if category.image %}
@@ -132,7 +169,7 @@
         <div class="col-md-12 my-4">
             <div class="card shadow-sm">
                 <div class="card-header bg-success text-white">
-                    <h3 class="card-title mb-0">Presentaciones Destacadas</h3>
+                    <h3 class="card-title mb-0">Productos Nuevos</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -194,20 +231,7 @@
             }
         </style>
 
-        <div class="col-md-12">
-            <!-- Slider with multiple images and center mode -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Card Title</h3>
-                </div>
-                <div class="card-body">
-                    <p>This is the content of the card. You can add any text or HTML elements here.</p>
-                </div>
-                <div class="card-footer text-right">
-                    <button class="btn btn-primary">Action</button>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 {% endblock content_principal %}
