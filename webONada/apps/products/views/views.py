@@ -15,10 +15,12 @@ def products(request):
 
     # listado de productos
     products = ProductPresentation.objects.all()
+    categories = Category.objects.all()
 
     context = {
         'form': form,
         'products': products,
+        'categories': categories,
     }
 
     return render(request, 'products/products.html', context)

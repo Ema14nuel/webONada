@@ -65,7 +65,7 @@
 <div class="content">
     <div class="row">
         
-        <div class="col-md-8">
+        <div class="col-md-12">
             <!-- Slider -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white text-center">
@@ -94,33 +94,6 @@
         </div>
 
         
-        <div class="col-md-4">
-            <!-- Categorias -->
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="card-title mb-0">Categorías</h4>
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        {% for category in categories %}
-                            <li class="list-group-item d-flex align-items-center">
-                                {% if category.image %}
-                                    <img src="{{ category.image.url }}" alt="{{ category.name }}" class="rounded me-2" style="width:32px; height:32px; object-fit:cover;">
-                                {% else %}
-                                    <img src="{% static 'assets/img/default-category.png' %}" alt="Sin imagen" class="rounded me-2" style="width:32px; height:32px; object-fit:cover;">
-                                {% endif %}
-                                <a href="{% url 'products:categories_detail' category.id %}" style="text-decoration: none; color: inherit;">
-                                    <span>{{ category.name }}</span>
-                                </a>
-                            </li>
-                        {% empty %}
-                            <li class="list-group-item text-muted text-center">No hay categorías disponibles.</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-
         <div class="col-md-12 my-4">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
