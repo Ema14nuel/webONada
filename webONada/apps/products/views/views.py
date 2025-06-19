@@ -34,8 +34,12 @@ def products_detail(request, pk):
     # listado de productos
     products = ProductPresentation.objects.get(id=pk)
 
+    #listado de productos por categoria
+    productsCategory = ProductPresentation.objects.filter(product__category__id=products.product.category.id).exclude(id=products.id)
+
     context = {
         'products': products,
+        'productsCategory': productsCategory,
     }
 
     return render(request, 'products/products_detail.html', context)
@@ -50,6 +54,7 @@ def categories(request):
 
     context = {
         'categories': categories,
+        
     }
 
     return render(request, 'products/categories.html', context)
@@ -62,8 +67,12 @@ def categories_detail(request, pk):
     # listado de categorias
     category = Category.objects.get(id=pk)
 
+    #listado de productos por categoria
+    products = ProductPresentation.objects.filter(product__category__id=pk)
+
     context = {
         'category': category,
+        'products': products,
     }
 
     return render(request, 'products/categories_detail.html', context)

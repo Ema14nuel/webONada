@@ -241,6 +241,111 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Otros Productos: {{products.product.category.name}}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for presentation in productsCategory %}
+                        <div class="col-lg-2 col-md-2 col-sm-2 mb-4">
+                            <div class="card product-card"> {# Usamos .card para aprovechar estilos de dashmix #}
+                                {% if presentation.featured_image %}
+                                    <img src="{{ presentation.featured_image.url }}" class="card-img-top" alt="{{ presentation.featured_title|default:presentation.product.name }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/300x200?text=Producto+sin+imagen" class="card-img-top" alt="Imagen no disponible">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">{{ presentation.featured_title|default:presentation.product.name }}</h5>
+                                    {% if presentation.price %}
+                                        <p class="product-price fs-4 text-success fw-bold">${{ presentation.price }}</p>
+                                    {% else %}
+                                        <p class="product-price text-muted">Precio no disponible</p>
+                                    {% endif %}
+                                    <div class="d-flex gap-2 mt-auto">
+                                        <a href="{% url 'products:products_detail' presentation.id  %}" class="btn btn-success btn-sm d-flex align-items-center">
+                                            <i class="fa fa-info-circle me-1"></i> Ver Detalle
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="product-{{presentation.id}}"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog  modal-xl">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalle Producto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">{{presentation.product.category.name}}</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">{{presentation.featured_title}}</li>
+                                        </ol>
+                                    </nav>
+
+                                    <h1 class="h3 mb-2">{{presentation.featured_title}}</h1>
+
+                                    <div class="d-flex align-items-center mb-3">
+                                        <!--<div class="text-warning me-2">
+                                            &#9733;&#9733;&#9733;&#9733;&#9734;
+                                        </div>
+                                        <a href="#" class="text-decoration-none me-3">4.7 (20 reviews)</a>
+                                        <a href="#" class="text-decoration-none me-3">Write your review</a>
+                                        <span class="text-muted me-3">Modelo: {{presentation.product.category.sku}}</span>-->
+                                        <span class="text-muted" >Código: <b class="text-danger">{{presentation.product.category.sku}}-{{presentation.id}}</b></span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <div class="card mb-4">
+                                                <div class="card-body text-center">
+                                                    <img src="{{ presentation.featured_image.url }}" class="product-image img-fluid" alt="{{ presentation.featured_title|default:presentation.product.name }}" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5">
+                                            <!--<div class="d-flex justify-content-end mb-3">
+                                                <span class="save-badge">SAVE $300</span>
+                                            </div>-->
+                                            <p class="h2 text-success mb-3">$ {{presentation.price}}</p>
+                                            <!-- <p class="text-muted mb-3"><span class="price-old">$1,899<sup>99</sup></span> SALE ends: August 11, 2022</p>-->
+
+                                            <div class="delivery-info mb-4">
+                                                <h5 class="mb-3">{{presentation.featured_title}}</h5>
+                                                <p class="mb-2">{{presentation.short_description}}.</p>
+                                            </div>
+
+                                            <div class="d-flex align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shop me-2" viewBox="0 0 16 16">
+                                                    <path d="M2.97 1A1 1 0 0 0 2 2v2h12V2a1 1 0 0 0-1-1zm3.915 2.147A3.017 3.017 0 0 1 8 4.5a3.017 3.017 0 0 1 1.115-1.353l-.707-.707a4.017 4.017 0 0 0-1.414 0l-.707.707zM1 5v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5zm12 0H3v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z"/>
+                                                </svg>
+                                                <span>Disponible</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dvi>
 </div>
 {% endblock content_principal %}
 
