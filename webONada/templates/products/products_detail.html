@@ -1,0 +1,367 @@
+{% extends 'common/web/base.html' %}
+{% load static %}
+
+{% block title_principal %}
+    {{products.product.category.sku}}-{{products.id}} | {{products.featured_title}}
+{% endblock title_principal %}
+
+
+{% block content_principal %}
+<!-- Page Content -->
+<div class="content">
+    <div class="block block-rounded">
+        <div class="block-content">
+            <div class="py-4 text-center">
+                <h1 class="mb-2">{{products.product.category.sku}}-{{products.id}} | {{products.featured_title}}</h1>
+                <h2 class="h4 fw-normal text-muted">Detalle producto: {{products.featured_title}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block block-rounded">
+                <div class="block-content">
+                    <div class="container mt-4">
+                        <div class="row  mb-5">
+                            {# Product Images Column #}
+                            <div class="col-md-6">
+                                <div class="row">
+                                    {# Main Product Image #}
+                                    <div class="col-12 mb-3">
+                                        {% if products.product.images.first %}
+                                            <img src="{{ products.featured_image.url }}" class="img-fluid rounded border" alt="{{ products.featured_image.url  }}">
+                                        {% else %}
+                                            <img src="https://via.placeholder.com/600x600?text=No+Image" class="img-fluid rounded border" alt="No image available">
+                                        {% endif %}
+                                    </div>
+                                    {# Thumbnail Images (if any) #}
+                                    <!-- 
+                                    <div class="col-12">
+                                        <div class="d-flex overflow-auto">
+                                            {% for image in products.product.images.all %}
+                                                <img src="{{ image.image.url }}" class="img-thumbnail me-2" style="width: 80px; height: 80px; object-fit: cover;" alt="{{ products.product.name }} thumbnail">
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+
+                            {# Product Details Column #}
+                            <div class="col-md-6">
+                                <h1 class="h3">{{ products.product.name }}</h1>
+                                <!-- 
+                                <p class="text-muted small">Calificación de nuestros clientes</p> {# You might want to link this to a seller/brand page #}
+
+                                {# Ratings Section #}
+                                <div class="d-flex align-items-center mb-3">
+                                    {% with avg_rating=products.product.ratings.all|default_if_none:0 %}
+                                        <div class="text-warning">
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= avg_rating %}
+                                                    <i class="bi bi-star-fill"></i>
+                                                {% else %}
+                                                    <i class="bi bi-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <span class="ms-2">{{ avg_rating|floatformat:1 }}</span>
+                                        <a href="#reviews" class="ms-2 text-decoration-none">({{ products.product.ratings.count }} calificaciones)</a>
+                                    {% endwith %}
+                                </div>
+                                -->
+                                <hr>
+
+                                {# Price Section #}
+                                <div class="mb-3">
+                                    <span class="fs-4 fw-bold text-danger">${{ products.price|floatformat:2 }}</span>
+                                    <span class="text-muted"> ({{ products.product.presentations.count }} unidades)</span>
+                                </div>
+
+                                <p class="text-muted">{{products.short_description}}</p>
+
+                                <!--
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="me-3">
+                                        <i class="bi bi-box-seam fs-4"></i>
+                                        <span class="ms-1">Material:</span>
+                                        <span class="fw-bold">Porcelana</span> {# Add a 'material' field #}
+                                    </div>
+                                    <div>
+                                        <i class="bi bi-cup fs-4"></i>
+                                        <span class="ms-1">Capacidad:</span>
+                                        <span class="fw-bold">12 Onzas</span> {# Add a 'capacity' field #}
+                                    </div>
+                                </div>
+                                -->
+
+                                <hr>
+
+                                <!-- <div class="mb-3">
+                                    <label for="quantity" class="form-label">Cantidad:</label>
+                                    <select class="form-select w-auto" id="quantity">
+                                        {% for i in "12345"|make_list %} {# Assuming max quantity 5 for example, adjust as needed #}
+                                            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div> 
+                                -->
+                                <!-- 
+                                {% if products.stock > 0 %}
+                                    <button class="btn btn-warning btn-lg w-100 mb-2"><i class="bi bi-cart-plus me-2"></i>Agregar al Carrito</button>
+                                    <button class="btn btn-outline-warning btn-lg w-100">Comprar ahora</button>
+                                {% else %}
+                                    <p class="text-danger fw-bold">Producto Agotado</p>
+                                    <button class="btn btn-secondary btn-lg w-100 mb-2" disabled>Agregar al Carrito</button>
+                                    <button class="btn btn-secondary btn-lg w-100" disabled>Comprar ahora</button>
+                                {% endif %}
+                                -->
+                                <button class="btn btn-success btn-lg w-100 mb-2"><i class="bi bi-cart-plus me-2"></i>Solicitar Información</button>
+                                <hr>
+                                <h3 class="text-center w-100 mb-3" style="margin-bottom: 1.5rem;">Galería de imágenes de producto</h3>
+                                <div class="d-flex overflow-auto">
+                                    {% for image in products.images.all %}
+                                        <img src="{{ image.image.url }}"
+                                            class="img-thumbnail me-2"
+                                            style="width: 80px; height: 80px; object-fit: cover; cursor:pointer;"
+                                            alt="{{ products.featured_title }} thumbnail"
+                                            data-bs-toggle="modal" data-bs-target="#galleryModal">
+
+                                        {% if forloop.first %}
+                                            <!-- Modal Gallery (only once) -->
+                                            <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                    <div class="modal-content bg-transparent border-0">
+                                                        <div class="modal-body text-center p-0 position-relative">
+                                                            <!-- Close button (X) -->
+                                                            <button type="button" class="btn-close position-absolute top-0 end-0 m-3 bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Close" style="z-index:2;"></button>
+                                                            <!-- Image -->
+                                                            <img id="galleryModalImage" src="" class="img-fluid rounded shadow mb-3" style="max-height:80vh; max-width:95vw;" alt="Imagen de producto">
+                                                            <!-- Modal Gallery Thumbnails (bottom, centered) -->
+                                                            <div class="d-flex justify-content-center align-items-center mt-3" style="gap: 1rem;">
+                                                                {% for image in products.images.all %}
+                                                                    <img src="{{ image.image.url }}"
+                                                                        class="img-thumbnail gallery-modal-thumb"
+                                                                        style="width: 80px; height: 80px; object-fit: cover; cursor:pointer; border: 2px solid transparent;"
+                                                                        data-gallery-index="{{ forloop.counter0 }}"
+                                                                        alt="{{ products.featured_title }} thumbnail">
+                                                                {% endfor %}
+                                                            </div>
+                                                            <script>
+                                                                var galleryImages = [
+                                                                    {% for image in products.images.all %}
+                                                                        "{{ image.image.url }}"{% if not forloop.last %},{% endif %}
+                                                                    {% endfor %}
+                                                                ];
+                                                                var currentIndex = 0;
+
+                                                                document.addEventListener('DOMContentLoaded', function() {
+                                                                    var thumbnails = document.querySelectorAll('[data-bs-target="#galleryModal"]');
+                                                                    var modalImage = document.getElementById('galleryModalImage');
+                                                                    var galleryModal = document.getElementById('galleryModal');
+                                                                    var modalThumbs = document.querySelectorAll('.gallery-modal-thumb');
+
+                                                                    thumbnails.forEach(function(thumb, idx) {
+                                                                        thumb.addEventListener('click', function() {
+                                                                            currentIndex = idx;
+                                                                            modalImage.src = galleryImages[currentIndex];
+                                                                            highlightModalThumb();
+                                                                        });
+                                                                    });
+
+                                                                    modalThumbs.forEach(function(thumb, idx) {
+                                                                        thumb.addEventListener('click', function(e) {
+                                                                            currentIndex = idx;
+                                                                            modalImage.src = galleryImages[currentIndex];
+                                                                            highlightModalThumb();
+                                                                        });
+                                                                    });
+
+                                                                    function highlightModalThumb() {
+                                                                        modalThumbs.forEach(function(thumb, idx) {
+                                                                            thumb.style.borderColor = (idx === currentIndex) ? '#0d6efd' : 'transparent';
+                                                                        });
+                                                                    }
+
+                                                                    // Keyboard navigation
+                                                                    galleryModal.addEventListener('shown.bs.modal', function () {
+                                                                        document.addEventListener('keydown', handleKeydown);
+                                                                        highlightModalThumb();
+                                                                    });
+                                                                    galleryModal.addEventListener('hidden.bs.modal', function () {
+                                                                        document.removeEventListener('keydown', handleKeydown);
+                                                                    });
+
+                                                                    function handleKeydown(e) {
+                                                                        if (e.key === 'ArrowRight') {
+                                                                            currentIndex = (currentIndex + 1) % galleryImages.length;
+                                                                            modalImage.src = galleryImages[currentIndex];
+                                                                            highlightModalThumb();
+                                                                        } else if (e.key === 'ArrowLeft') {
+                                                                            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+                                                                            modalImage.src = galleryImages[currentIndex];
+                                                                            highlightModalThumb();
+                                                                        } else if (e.key === 'Escape') {
+                                                                            var modal = bootstrap.Modal.getInstance(galleryModal);
+                                                                            modal.hide();
+                                                                        }
+                                                                    }
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Shipping Info Modal #}
+                    <div class="modal fade" id="shippingInfoModal" tabindex="-1" aria-labelledby="shippingInfoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="shippingInfoModalLabel">Información de Envío</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Detalles sobre los cargos de importación y el envío a Colombia.</p>
+                                    {# Add more specific shipping information here #}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Otros Productos: {{products.product.category.name}}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for presentation in productsCategory %}
+                        <div class="col-lg-2 col-md-2 col-sm-2 mb-4">
+                            <div class="card product-card"> {# Usamos .card para aprovechar estilos de dashmix #}
+                                {% if presentation.featured_image %}
+                                    <img src="{{ presentation.featured_image.url }}" class="card-img-top" alt="{{ presentation.featured_title|default:presentation.product.name }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/300x200?text=Producto+sin+imagen" class="card-img-top" alt="Imagen no disponible">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">{{ presentation.featured_title|default:presentation.product.name }}</h5>
+                                    {% if presentation.price %}
+                                        <p class="product-price fs-4 text-success fw-bold">${{ presentation.price }}</p>
+                                    {% else %}
+                                        <p class="product-price text-muted">Precio no disponible</p>
+                                    {% endif %}
+                                    <div class="d-flex gap-2 mt-auto">
+                                        <a href="{% url 'products:products_detail' presentation.id  %}" class="btn btn-success btn-sm d-flex align-items-center">
+                                            <i class="fa fa-info-circle me-1"></i> Ver Detalle
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="product-{{presentation.id}}"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog  modal-xl">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalle Producto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">{{presentation.product.category.name}}</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">{{presentation.featured_title}}</li>
+                                        </ol>
+                                    </nav>
+
+                                    <h1 class="h3 mb-2">{{presentation.featured_title}}</h1>
+
+                                    <div class="d-flex align-items-center mb-3">
+                                        <!--<div class="text-warning me-2">
+                                            &#9733;&#9733;&#9733;&#9733;&#9734;
+                                        </div>
+                                        <a href="#" class="text-decoration-none me-3">4.7 (20 reviews)</a>
+                                        <a href="#" class="text-decoration-none me-3">Write your review</a>
+                                        <span class="text-muted me-3">Modelo: {{presentation.product.category.sku}}</span>-->
+                                        <span class="text-muted" >Código: <b class="text-danger">{{presentation.product.category.sku}}-{{presentation.id}}</b></span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <div class="card mb-4">
+                                                <div class="card-body text-center">
+                                                    <img src="{{ presentation.featured_image.url }}" class="product-image img-fluid" alt="{{ presentation.featured_title|default:presentation.product.name }}" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5">
+                                            <!--<div class="d-flex justify-content-end mb-3">
+                                                <span class="save-badge">SAVE $300</span>
+                                            </div>-->
+                                            <p class="h2 text-success mb-3">$ {{presentation.price}}</p>
+                                            <!-- <p class="text-muted mb-3"><span class="price-old">$1,899<sup>99</sup></span> SALE ends: August 11, 2022</p>-->
+
+                                            <div class="delivery-info mb-4">
+                                                <h5 class="mb-3">{{presentation.featured_title}}</h5>
+                                                <p class="mb-2">{{presentation.short_description}}.</p>
+                                            </div>
+
+                                            <div class="d-flex align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shop me-2" viewBox="0 0 16 16">
+                                                    <path d="M2.97 1A1 1 0 0 0 2 2v2h12V2a1 1 0 0 0-1-1zm3.915 2.147A3.017 3.017 0 0 1 8 4.5a3.017 3.017 0 0 1 1.115-1.353l-.707-.707a4.017 4.017 0 0 0-1.414 0l-.707.707zM1 5v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5zm12 0H3v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z"/>
+                                                </svg>
+                                                <span>Disponible</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dvi>
+</div>
+{% endblock content_principal %}
+
+
+
+
+{% block extra_scripts %}
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/slick-carousel/slick.min.js' %}"></script>
+
+<!-- Page JS Helpers (Slick Slider Plugin) -->
+<script>Dashmix.helpersOnLoad(['jq-slick']);</script>
+
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready!");
+    });
+</script>
+{% endblock extra_scripts %}

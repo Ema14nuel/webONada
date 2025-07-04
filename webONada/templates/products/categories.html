@@ -1,0 +1,85 @@
+{% extends 'common/web/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title_principal %}
+    Productos
+{% endblock title_principal %}
+
+
+{% block content_principal %}
+<!-- Page Content -->
+<div class="content">
+    <div class="block block-rounded">
+        <div class="block-content">
+            <div class="py-4 text-center">
+                <h1 class="mb-2">Categorias</h1>
+                <h2 class="h4 fw-normal text-muted">Nuestras Categorias!</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 my-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Categorías</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for category in categories %}
+                            <div class="col-md-2 mb-2">
+                                <a href="{% url 'products:categories_detail' category.id %}" class="category-link" style="text-decoration: none;">
+                                    <div class="card h-100 border border-secondary category-card" style="overflow: hidden;">
+                                        <div class="position-relative category-image-container" style="width: 100%; aspect-ratio: 1/1; background: #f8f9fa;">
+                                            {% if category.image %}
+                                                <img src="{{ category.image.url }}" class="card-img-top w-100 h-100 category-img" alt="{{ category.name }}" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; transition: transform 0.3s, filter 0.3s;">
+                                            {% else %}
+                                                <img src="{% static 'assets/img/default-category.png' %}" class="card-img-top w-100 h-100 category-img" alt="Sin imagen" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; transition: transform 0.3s, filter 0.3s;">
+                                            {% endif %}
+                                            <!-- Overlay for text with dark background behind text only -->
+                                            <div class="position-absolute bottom-0 start-0 w-100 px-2 pb-2" style="z-index:2;">
+                                                <div class="category-text-bg px-2 py-2 rounded text-center" style="background: rgba(0,0,0,0.65);">
+                                                    <h5 class="card-title mb-2 text-white text-uppercase" style="text-shadow: 0 1px 2px rgba(0,0,0,0.7); letter-spacing: 1px;">
+                                                        {{ category.name|upper }}
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <style>
+                                    .category-link:hover .category-img {
+                                        transform: scale(1.07);
+                                        filter: brightness(0.7);
+                                    }
+                                </style>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <p class="text-center text-muted">No hay categorías disponibles.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_principal %}
+
+
+
+
+{% block extra_scripts %}
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/slick-carousel/slick.min.js' %}"></script>
+
+<!-- Page JS Helpers (Slick Slider Plugin) -->
+<script>Dashmix.helpersOnLoad(['jq-slick']);</script>
+
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready!");
+    });
+</script>
+{% endblock extra_scripts %}

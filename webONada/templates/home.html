@@ -1,0 +1,479 @@
+{% extends 'common/web/base.html' %}
+{% load static %}
+
+{% block title_principal %}
+    Inicio
+{% endblock title_principal %}
+
+{% block content_principal %}
+<style>
+/* The container helps position the text and button relative to the image */
+        .image-container {
+            position: relative; /* This is key for positioning child elements */
+            width: 100%; /* Or set a specific width */
+            max-width: 600px; /* Example: adjust as needed */
+            margin: 0 auto; /* Center the container */
+        }
+
+        .image-container img {
+            width: 100%; /* Make the image fill the container */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below image */
+        }
+
+        /* Style for the overlay content (text and button) */
+        .overlay-content {
+            position: absolute; /* Position relative to the .image-container */
+            bottom: 0; /* Place at the bottom of the container */
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+            color: white; /* Text color */
+            padding: 15px; /* Spacing around the text and button */
+            box-sizing: border-box; /* Include padding in the width */
+            text-align: center; /* Center the text and button */
+        }
+
+        .overlay-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5em; /* Adjust font size as needed */
+        }
+
+        .overlay-content p {
+            margin-bottom: 15px;
+            font-size: 1em; /* Adjust font size as needed */
+            line-height: 1.5;
+        }
+
+        .overlay-content .btn {
+            display: inline-block; /* Allows padding and margin */
+            background-color: #007bff; /* Button background color */
+            color: white; /* Button text color */
+            padding: 10px 20px;
+            text-decoration: none; /* Remove underline from link */
+            border-radius: 5px; /* Rounded corners for the button */
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+        }
+
+        .overlay-content .btn:hover {
+            background-color: #0056b3; /* Darker background on hover */
+        }
+
+        /* General body styling for better spacing */
+body {
+    background-color: #f8f9fa; /* Light grey background */
+}
+
+/* Header/Navbar adjustments */
+.navbar-brand img {
+    margin-right: 5px;
+}
+.navbar .nav-link i {
+    margin-right: 5px;
+}
+.navbar-toggler {
+    border: none;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures shadow follows border-radius */
+}
+
+.card-header {
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+/* Slider specific styles */
+.block {
+    margin: 0 -10px; /* Counteract padding if any from parent */
+}
+
+.slick-slide {
+    margin: 0 10px; /* Space between slides */
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden; /* Ensures overlay content stays within bounds */
+    border-radius: 8px; /* Match card styling */
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Removes any extra space below the image */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+/* Hover effect for images */
+.image-container:hover img {
+    transform: scale(1.05); /* Slightly zoom in on hover */
+}
+
+.overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker for better contrast */
+    color: white;
+    padding: 10px 5px; /* Reduced horizontal padding */
+    text-align: center;
+    transform: translateY(100%); /* Start hidden below the image */
+    transition: transform 0.3s ease-in-out; /* Smooth slide-up effect */
+    border-bottom-left-radius: 8px; /* Match card styling */
+    border-bottom-right-radius: 8px;
+}
+
+/* Show overlay on hover */
+.image-container:hover .overlay-content {
+    transform: translateY(0); /* Slide up to be visible */
+}
+
+.overlay-content h3 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    white-space: nowrap; /* Prevent title from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
+.overlay-content .btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    background-color: #007bff; /* Bootstrap primary blue */
+    border-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.overlay-content .btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Slick Carousel Customizations for arrows and dots */
+.slick-prev, .slick-next {
+    font-size: 0; /* Hide default text */
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 40px; /* Larger click area */
+    height: 40px;
+    padding: 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%; /* Circular buttons */
+    z-index: 10; /* Ensure they are above images */
+}
+
+.slick-prev:hover, .slick-next:hover,
+.slick-prev:focus, .slick-next:focus {
+    color: transparent;
+    outline: none;
+    background: rgba(0, 0, 0, 0.7); /* Darker on hover/focus */
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'Font Awesome 5 Free'; /* Assuming you have Font Awesome for icons */
+    font-weight: 900; /* For solid icons */
+    font-size: 20px;
+    line-height: 1;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev {
+    left: 15px;
+}
+.slick-prev:before {
+    content: '\f104'; /* Font Awesome left arrow icon */
+}
+
+.slick-next {
+    right: 15px;
+}
+.slick-next:before {
+    content: '\f105'; /* Font Awesome right arrow icon */
+}
+
+/* Dots styling */
+.slick-dots {
+    position: absolute;
+    bottom: -25px; /* Position below the slider */
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.slick-dots li button:before {
+    font-size: 10px; /* Size of the dot */
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    content: '•';
+    text-align: center;
+    opacity: .25;
+    color: black; /* Default dot color */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: .75;
+    color: #007bff; /* Active dot color (Bootstrap primary) */
+}
+
+
+/* Media Queries for responsiveness */
+@media (max-width: 991.98px) { /* Breakpoint for smaller desktops/tablets */
+    /* Slider will show 1 slide based on data-responsive, so adjust margins */
+    .slick-slide {
+        margin: 0; /* Remove horizontal margin for single slide */
+    }
+    .card-body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .slick-prev {
+        left: 5px; /* Move arrows closer to the edge */
+    }
+    .slick-next {
+        right: 5px; /* Move arrows closer to the edge */
+    }
+}
+
+@media (max-width: 767.98px) { /* Tablets in portrait mode and smaller */
+    .overlay-content h3 {
+        font-size: 1rem; /* Smaller font size for titles */
+    }
+    .overlay-content .btn {
+        padding: 6px 12px; /* Smaller padding for buttons */
+        font-size: 0.8rem; /* Smaller font size for buttons */
+    }
+    /* Hide navigation items in the header on smaller screens, relying on toggler */
+    .navbar-collapse {
+        background-color: #f8f9fa; /* Background for collapsed menu */
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+    .navbar-nav .nav-item {
+        margin-left: 10px; /* Indent menu items */
+    }
+}
+
+@media (max-width: 575.98px) { /* Extra small devices (phones) */
+    .overlay-content {
+        padding: 8px 3px; /* Even smaller padding for very small screens */
+    }
+    .overlay-content h3 {
+        font-size: 0.9rem; /* Even smaller font size for titles */
+    }
+    .overlay-content .btn {
+        padding: 5px 10px; /* Even smaller padding for buttons */
+        font-size: 0.75rem; /* Even smaller font size for buttons */
+    }
+    /* Hide arrows on very small screens if they become too intrusive */
+    .slick-prev, .slick-next {
+        display: none !important;
+    }
+}
+</style>
+
+<!-- Page Content -->
+<div class="content">
+    <div class="row"> 
+        <div class="col-md-12">
+            <!-- Slider -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="card-title mb-0">Bienvenidos</h3>
+                </div>
+                <div class="card-body"><!-- Slider with multiple images and center mode -->
+                    <div class="block">
+                        <div class="js-slider slick-nav-black slick-nav-hover"
+                                data-dots="true"
+                                data-arrows="true"
+                                data-slides-to-show="3"
+                                data-center-mode="true"
+                                data-autoplay="true"
+                                data-autoplay-speed="3000"
+                                data-responsive='[{"breakpoint": 992, "settings": {"slidesToShow": 1, "centerMode": false}}]'
+                            >
+                            {% for picture in pictures_banner %}
+                                <div class="image-container">
+                                    <img src="{{ picture.image.url }}" alt="{{ picture.image.url }}">
+
+                                    <div class="overlay-content">
+                                        <h3>{{ picture.product.featured_title }}</h3>
+                                        <a href="{% url 'products:products_detail' picture.product.id  %}" class="btn">Ver</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-md-12 my-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-white" style="background-color: #EC268F; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
+                    <h3 class="card-title mb-0">Categorías</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for category in categories %}
+                            <div class="col-md-2 mb-4">
+                                <a href="{% url 'products:categories_detail' category.id %}" class="category-link" style="text-decoration: none;">
+                                    <div class="card h-100 border border-secondary category-card" style="overflow: hidden;">
+                                        <div class="position-relative category-image-container" style="width: 100%; aspect-ratio: 1/1; background: #f8f9fa;">
+                                            {% if category.image %}
+                                                <img src="{{ category.image.url }}" class="card-img-top w-100 h-100 category-img" alt="{{ category.name }}" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; transition: transform 0.3s, filter 0.3s;">
+                                            {% else %}
+                                                <img src="{% static 'assets/img/default-category.png' %}" class="card-img-top w-100 h-100 category-img" alt="Sin imagen" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; transition: transform 0.3s, filter 0.3s;">
+                                            {% endif %}
+                                            <!-- Overlay for text with dark background behind text only -->
+                                            <div class="position-absolute bottom-0 start-0 w-100 px-2 pb-2" style="z-index:2;">
+                                                <div class="category-text-bg px-2 py-2 rounded text-center" style="background: rgba(0,0,0,0.65);">
+                                                    <h5 class="card-title mb-2 text-white text-uppercase" style="text-shadow: 0 1px 2px rgba(0,0,0,0.7); letter-spacing: 1px;">
+                                                        {{ category.name|upper }}
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <style>
+                                    .category-link:hover .category-img {
+                                        transform: scale(1.07);
+                                        filter: brightness(0.7);
+                                    }
+                                </style>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <p class="text-center text-muted">No hay categorías disponibles.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 my-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-white text-center" style="background-color: #EC268F; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
+                    <h3 class="card-title mb-0">Productos Nuevos</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for presentation in featured_presentations %}
+                            <div class="col-12 col-sm-6 col-md-2 col-lg-2 mb-2">
+                                <div class="card h-100 border border-secondary">
+                                    <div class="position-relative" style="width: 100%; aspect-ratio: 1/1; background: #f8f9fa; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                        {% if presentation.featured_image %}
+                                            <img src="{{ presentation.featured_image.url }}" class="card-img-top w-100 h-100" alt="{{ presentation.product.featured_title }}" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0;">
+                                        {% else %}
+                                            <img src="{% static 'assets/img/default-product.png' %}" class="card-img-top w-100 h-100" alt="Sin imagen" style="object-fit: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0;">
+                                        {% endif %}
+                                        <!-- Overlay for title inside the image -->
+                                        <div class="position-absolute bottom-0 start-0 w-100 px-2 pb-2" style="z-index:2;">
+                                            <div class="px-2 py-2 rounded text-center" style="background: rgba(0,0,0,0.65);">
+                                                <h5 class="mb-0 text-white text-uppercase" style="text-shadow: 0 1px 2px rgba(0,0,0,0.7); letter-spacing: 1px;">
+                                                    {{ presentation.featured_title }}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            {{ presentation.short_description|truncatewords:10|default_if_none:"" }}
+                                        </p>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a href="{% url 'products:products_detail' presentation.id %}" class="btn btn-sm product-btn" style="background-color: #EC268F; color: #fff;">Ver producto</a>
+                                        <style>
+                                            .product-btn:hover {
+                                                background-color: #ff5fc0 !important; /* Un rosado más claro */
+                                                color: #fff !important;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <p class="text-center text-muted">No hay presentaciones destacadas.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <style>
+            /* Estilos para el hover de las categorías */
+            .category-link:hover .category-img {
+                transform: scale(1.07);
+                filter: brightness(0.7);
+            }
+
+            /* Opcional: para añadir un efecto similar al pasar el ratón por los productos */
+            .product-card {
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            }
+
+            .product-card:hover {
+                transform: translateY(-5px); /* Slightly lift the card */
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhance shadow */
+            }
+        </style>
+
+        
+    </div>
+</div>
+{% endblock content_principal %}
+
+
+
+
+{% block extra_scripts %}
+<!-- Page JS Plugins -->
+<script src="{% static 'assets/js/plugins/slick-carousel/slick.min.js' %}"></script>
+
+<!-- Page JS Helpers (Slick Slider Plugin) -->
+<script>Dashmix.helpersOnLoad(['jq-slick']);</script>
+
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready!");
+    });
+</script>
+{% endblock extra_scripts %}
