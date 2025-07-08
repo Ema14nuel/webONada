@@ -1,23 +1,89 @@
-{% extends 'common/web/base.html' %}
+{% extends 'common/web/base.html' %} 
+{% load static %}
+
+{% block title_principal %}
+    Nosotros
+{% endblock title_principal %}
 
 {% block content_principal %}
 <!-- Page Content -->
 <div class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Slider with multiple images and center mode -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Card Title</h3>
-                </div>
-                <div class="card-body">
-                    <p>This is the content of the card. You can add any text or HTML elements here.</p>
-                </div>
-                <div class="card-footer text-right">
-                    <button class="btn btn-primary">Action</button>
+<!-- Hero -->
+<div class="block block-rounded">
+    <div class="block-content">
+        <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: radial-gradient(circle at 60% 40%, #e83e8c33 60%, transparent 100%); z-index: 0;"></div>
+        <div style="position: absolute; bottom: -40px; left: -40px; width: 120px; height: 120px; background: radial-gradient(circle at 40% 60%, #e83e8c22 60%, transparent 100%); z-index: 0;"></div>
+            
+        <div class="py-4 text-center">
+            <h1 class="mb-2" style="color: #e83e8c; font-size: 2.8rem; font-weight: bold; letter-spacing: 2px; text-shadow: 1px 2px 8px #e83e8c22;">
+                Nosotros
+            </h1>
+            <h2 class="h4 fw-normal text-muted">
+                Somos una empresa dedicada a hacer las cosas con pasión y amor, comprometidos en brindar lo mejor a nuestros clientes.
+            </h2>
+        </div>
+    </div>
+</div>
+<!-- END Hero -->
+
+<!-- Dummy content -->
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="block block-rounded shadow-lg border-0 h-100 bg-white position-relative overflow-hidden">
+            <!-- Decorative background shapes -->
+            <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: radial-gradient(circle at 60% 40%, #e83e8c33 60%, transparent 100%); z-index: 0;"></div>
+            <div style="position: absolute; bottom: -40px; left: -40px; width: 120px; height: 120px; background: radial-gradient(circle at 40% 60%, #e83e8c22 60%, transparent 100%); z-index: 0;"></div>
+            <div class="block-content p-5 position-relative" style="z-index: 1;">
+                <h4 class="text-center mb-4" style="color: #e83e8c; font-size: 2.3rem; letter-spacing: 2px; font-weight: bold; text-transform: uppercase; text-shadow: 1px 2px 8px #e83e8c22;">
+                    Sobre Nosotros
+                </h4>
+                <hr class="mb-4" style="border-top: 2.5px solid #e83e8c; width: 70px; margin: 0 auto;">
+                <div style="text-align: justify; font-size: 1.13rem; color: #444; line-height: 1.8;">
+                    <p>
+                        <span style="font-weight: 700; color: #e83e8c;">Distribuciones Decam</span> cree en el poder de los pequeños detalles para crear grandes momentos… ¡y grandes oportunidades! Desde 2023, nos especializamos en <span style="font-weight: 600;">velas personalizadas</span>, destacándonos especialmente durante la temporada del <span style="font-style: italic;">7 de velitas</span>, una fecha en la que nuestras creaciones se convierten en protagonistas de la tradición, el color y la emoción.
+                    </p>
+                    <p>
+                        También ofrecemos una amplia línea de <span style="font-weight: 600;">productos de sublimación</span>: tazas, termos, cojines y más, todos listos para personalizar según tu estilo o el de tus clientes.
+                    </p>
+                    <p>
+                        Pero en Decam vamos más allá: queremos que tú también emprendas. Por eso, nuestros productos están pensados no solo para regalar o decorar, sino también para ayudarte a iniciar o fortalecer tu propio negocio. <span style="font-weight: 600;">Te damos las herramientas, tú pones la pasión.</span>
+                    </p>
+                    <div class="my-4 text-center">
+                        En Decam, transformamos ideas en productos únicos y te acompañamos a crecer como emprendedor.
+                    </div>
+                    <p class="text-center" style="font-size: 1.18rem; font-weight: 600; color: #e83e8c; word-break: break-word;">
+                        Personaliza, vende y crece con nosotros.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-lg-4 mb-4 d-flex align-items-center">
+        <div class="block block-rounded shadow-lg border-0 w-100 bg-white position-relative overflow-hidden">
+            <!-- Decorative circle -->
+            <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 90px; height: 90px; background: radial-gradient(circle, #e83e8c22 60%, transparent 100%); z-index: 0;"></div>
+            <div class="w-100 d-flex justify-content-center mb-4 position-relative" style="z-index: 1;">
+                <img src="{% static 'assets/img/logo_decam_principal.png' %}" alt="Logo Decam" class="img-fluid" style="max-height: 120px; filter: drop-shadow(0 2px 8px #e83e8c33);">
+            </div>
+            <div class="block-content p-4 d-flex flex-column align-items-center position-relative" style="z-index: 1;">
+                <div class="rounded shadow mb-3 overflow-hidden" style="width: 100%; max-height: 320px;">
+                    <img src="{% static 'assets/img/imagen_decam1.png' %}" alt="Sobre Nosotros" class="img-fluid" style="object-fit: cover; width: 100%; height: 320px;">
+                </div>
+                <div class="text-center mt-2">
+                    <h5 style="color: #e83e8c; font-weight: bold; letter-spacing: 1px;">Nuestro Equipo</h5>
+                    <p style="font-size: 1.01rem; color: #666;">
+                        Un grupo apasionado y creativo, comprometido con la calidad y la innovación en cada producto.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2 mt-3">
+                        <span class="badge rounded-circle" style="background: #e83e8c; width: 14px; height: 14px;"></span>
+                        <span class="badge rounded-circle" style="background: #f8bbd0; width: 14px; height: 14px;"></span>
+                        <span class="badge rounded-circle" style="background: #fff3e6; width: 14px; height: 14px; border: 1px solid #e83e8c;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Dummy content -->
 </div>
 {% endblock content_principal %}

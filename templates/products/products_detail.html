@@ -11,9 +11,16 @@
 <div class="content">
     <div class="block block-rounded">
         <div class="block-content">
+            <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: radial-gradient(circle at 60% 40%, #e83e8c33 60%, transparent 100%); z-index: 0;"></div>
+            <div style="position: absolute; bottom: -40px; left: -40px; width: 120px; height: 120px; background: radial-gradient(circle at 40% 60%, #e83e8c22 60%, transparent 100%); z-index: 0;"></div>
+                
             <div class="py-4 text-center">
-                <h1 class="mb-2">{{products.product.category.sku}}-{{products.id}} | {{products.featured_title}}</h1>
-                <h2 class="h4 fw-normal text-muted">Detalle producto: {{products.featured_title}}</h2>
+                <h1 class="mb-2" style="color: #e83e8c; font-size: 2.8rem; font-weight: bold; letter-spacing: 2px; text-shadow: 1px 2px 8px #e83e8c22;">
+                    {{products.product.category.sku}}-{{products.id}} | {{products.featured_title}}
+                </h1>
+                <h2 class="h4 fw-normal text-muted">
+                    Detalle producto: {{products.featured_title}}
+                </h2>
             </div>
         </div>
     </div>
@@ -116,7 +123,9 @@
                                     <button class="btn btn-secondary btn-lg w-100" disabled>Comprar ahora</button>
                                 {% endif %}
                                 -->
-                                <button class="btn btn-success btn-lg w-100 mb-2"><i class="bi bi-cart-plus me-2"></i>Solicitar Información</button>
+                                <a href="https://wa.me/573161689267?text=Hola%20amigos%20de%20Decam,%20solicito%20información%20de%20{{products.product.category.sku}}-{{products.id}}%20({{products.featured_title}})" target="_blank" class="btn btn-success btn-lg w-100 mb-2">
+                                    <i class="bi bi-whatsapp me-2"></i>Solicitar Información por WhatsApp
+                                </a>
                                 <hr>
                                 <h3 class="text-center w-100 mb-3" style="margin-bottom: 1.5rem;">Galería de imágenes de producto</h3>
                                 <div class="d-flex overflow-auto">
@@ -244,7 +253,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header text-white" style="background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);">
                     <h3 class="card-title mb-0">Otros Productos: {{products.product.category.name}}</h3>
                 </div>
                 <div class="card-body">

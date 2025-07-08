@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link " href="javascript:void(0)">
+                    <a class="nav-main-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'sites:about' %}">
                         <i class="nav-main-link-icon fas fa-users"></i>
                         <span class="nav-main-link-name">Nosotros</span>
                     </a>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link " href="javascript:void(0)">
+                    <a class="nav-main-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'sites:contact' %}">
                         <i class="nav-main-link-icon fas fa-headset"></i>
                         <span class="nav-main-link-name">Contacto</span>
                     </a>
