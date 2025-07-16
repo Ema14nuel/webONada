@@ -62,7 +62,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">{{ presentation.featured_title|default:presentation.product.name }}</h5>
                                     {% if presentation.price %}
-                                        <p class="product-price fs-4 text-success fw-bold">${{ presentation.price }}</p>
+                                        <p class="product-price fs-4 text-success fw-bold">${{ presentation.price|floatformat:0 }}</p>
                                     {% else %}
                                         <p class="product-price text-muted">Precio no disponible</p>
                                     {% endif %}
@@ -120,7 +120,7 @@
                                             <!--<div class="d-flex justify-content-end mb-3">
                                                 <span class="save-badge">SAVE $300</span>
                                             </div>-->
-                                            <p class="h2 text-success mb-3">$ {{presentation.price}}</p>
+                                            <p class="h2 text-success mb-3">$ {{presentation.price|floatformat:0}}</p>
                                             <!-- <p class="text-muted mb-3"><span class="price-old">$1,899<sup>99</sup></span> SALE ends: August 11, 2022</p>-->
 
                                             <div class="delivery-info mb-4">
